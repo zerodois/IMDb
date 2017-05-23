@@ -1,0 +1,58 @@
+body, html
+    height: 100%
+    overflow: auto
+.has-shadow
+    @extend .nav.has-shadow
+.white
+    color: white !important
+.primary, .primary:before
+    color: $primary !important
+.pointer
+    cursor: pointer
+.ghost
+    opacity: 0.7
+    &:hover
+        opacity: 1
+.modal.is-active ~ .blurrable
+    +blur(10px)
+    //background-color: tomato
+.landing
+    height: 100%
+    background-image: url('../img/bg_blur2.jpg')
+
+    background-size: 100% auto
+.search
+    margin-top: 10px
+    border: none
+    border-bottom: thin solid rgba($text-color, 0.5)
+    box-shadow: none
+    color: $text-color !important
+    background-color: transparent
+    border-radius: 0
+    &:hover
+        border-bottom: thin solid rgba($text-color, 1)
+    &:focus
+        border-bottom: thin solid rgba($text-color, 1)
+.content
+    h1.title
+        user-select: none
+        font-family: $title-font
+        font-size: 3em
+        font-weight: 100
+        color: $text-color
+    height: 100%
+    background-color: rgba($primary, $bg-alpha)
+    form
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+    button, button:hover, button:focus, button:active
+        background-color: transparent
+        color: $text-color
+        border: thin solid $text-color
+        margin-top: 7px
+.autocomplete
+    background-color: white
+    margin-top: -15px
+    padding: 10px 15px
