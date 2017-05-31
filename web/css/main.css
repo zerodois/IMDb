@@ -4354,6 +4354,9 @@ body, html {
   width: auto;
   border-radius: 5px; }
 
+header.is-primary {
+  background-color: #00d1b2; }
+
 .card {
   border: 0;
   box-shadow: none; }
@@ -4365,7 +4368,7 @@ body, html {
     margin-top: 3px; }
   .card figure.image.is-square img {
     height: auto;
-    margin-top: -35px; }
+    margin-top: -40px; }
 
 .notification {
   padding-top: 15px; }
@@ -4383,7 +4386,6 @@ body, html {
     width: 50%;
     height: calc(100% + 10px);
     background-color: white;
-    border: thin solid #eee;
     border-radius: 3px; }
     .header .search-area input {
       background-color: transparent;
@@ -4413,3 +4415,19 @@ header {
   header i {
     font-size: 40px;
     width: auto; }
+
+#not-found, #internal-error {
+  background-color: #00d1b2 !important;
+  background-image: url("../img/background.svg"); }
+  #not-found figure, #internal-error figure {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%); }
+  #not-found img, #internal-error img {
+    margin: auto;
+    height: 50vh; }
+
+#internal-error img {
+  height: 70vh; }

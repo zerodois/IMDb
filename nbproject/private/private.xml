@@ -4,12 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/felipe/myRepo/imdb/web/index.jsp</file>
-            <file>file:/home/felipe/myRepo/imdb/web/WEB-INF/tags/scripts.tag</file>
+            <file>file:/home/felipe/myRepo/imdb/src/java/persistence/MovieDAO.java</file>
             <file>file:/home/felipe/myRepo/imdb/web/search.jsp</file>
-            <file>file:/home/felipe/myRepo/imdb/web/sass/_mixins.sass</file>
-            <file>file:/home/felipe/myRepo/imdb/web/sass/main.sass</file>
-            <file>file:/home/felipe/myRepo/imdb/web/sass/_search.sass</file>
-            <file>file:/home/felipe/myRepo/imdb/web/sass/_global.sass</file>
         </group>
     </open-files>
 </project-private>
