@@ -16,7 +16,7 @@
         <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
         <tag:include />
     </head>
-    <body>
+    <body class="relative">
         <div id="app">
             <!-- INICIO: MODAL  -->
             <div id="movie-viewer" class="modal" :class="{ 'is-active' : active}" v-if="active">
@@ -48,9 +48,15 @@
             </header>
             <section class="container blurrable">
                 <article class="columns">
+                    <% if ((Integer) request.getAttribute("total") > 0) { %>
                     <div class="column is-5 is-offset-1">
                         <%= request.getAttribute("total") %> Resultados encontrados
                     </div>
+                    <% } else { %>
+                    <div class="column is-12 has-text-centered">
+                        <figure class="image empty-search"><img src="img/ue.svg" alt=""></figure>
+                    </div>
+                    <% } %>
                 </article>
                 <article class="columns" v-for="(x, i) in Math.ceil(movies.length/4)">
                     <div class="column is-10 is-offset-1">

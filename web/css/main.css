@@ -4357,6 +4357,13 @@ body, html {
 header.is-primary {
   background-color: #00d1b2; }
 
+.empty-search img {
+  opacity: 0.5;
+  margin: auto;
+  margin-top: 10vh;
+  width: auto;
+  height: 50vh; }
+
 .card {
   border: 0;
   box-shadow: none; }
