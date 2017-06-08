@@ -38,7 +38,7 @@ public class MovieDAO {
                 total = result.getInt("total");
             Movie m = new Movie();
             m.setId(result.getInt("id"));
-            m.setYear(result.getString("mvyear"));
+            m.setYear(result.getString("year"));
             m.setTitle(result.getString("title"));
             list.add(m);
         }

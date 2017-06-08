@@ -12,14 +12,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>IMDb | <%= request.getAttribute("search") %></title>
+        <% String busca = request.getAttribute("search").toString(); %>
+        <title>IMDb | <%= busca %></title>
         <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
         <tag:include />
     </head>
     <body class="relative">
         <div id="app">
             <!-- INICIO: MODAL  -->
-            <div id="movie-viewer" class="modal" :class="{ 'is-active' : active}" v-if="active">
+            <div id="movie-viewer" class="modal" :class="{ 'is-active' : active }" v-if="active">
                 <div class="modal-background"></div>
                 <div class="modal-content">
                     <section class="box">
@@ -37,9 +38,53 @@
                     <a href="/imdb"><i class="icon-logo white"></i></a>
                 </section>
                 <form action="/imdb/search" method="GET">
-                    <section class="center search-area">
-                        <input class="input is-primary" type="text" name="term" value="<%= request.getAttribute("search")%>">
-                        <i class="fa fa-search"></i>
+                    <section class="center search-area relative is-active">
+                        <p class="control has-icons-left has-icons-right">
+                            <input name="term" class="input is-primary no-padding-top" value="<%= busca %>" placeholder="Título do filme" type="text" placeholder="Text input">
+                            <span class="icon is-small is-left">
+                              <i class="fa fa-search"></i>
+                            </span>
+                        </p>
+                        <i class="fa fa-caret-down pointer" @click="advanced = !advanced"></i>
+                        <div class="advanced-search" v-show="advanced">
+                            <hr>
+                            <section class="columns no-margin">
+                                <article class="column is-4">Ano de lançamento: </article>
+                                <article class="column is-8">
+                                    <input type="text" placeholder="Ex.: 2004" class="input flat">
+                                </article>
+                            </section>
+                            <section class="columns no-margin">
+                                <article class="column is-4">Línguagem: </article>
+                                <article class="column is-8">
+                                    <input type="text" placeholder="Ex.: Português; Russo" class="input flat">
+                                </article>
+                            </section>
+                            <section class="columns no-margin">
+                                <article class="column is-4">Gênero: </article>
+                                <article class="column is-8">
+                                    <input type="text" placeholder="Ex.: Drama; Suspense" class="input flat">
+                                </article>
+                            </section>
+                            <section class="columns no-margin">
+                                <article class="column is-4">Atores envolvidos: </article>
+                                <article class="column is-8">
+                                    <input type="text" placeholder="Ex.: Lernardo DiCaprio; Sasha Gray" class="input flat">
+                                </article>
+                            </section>
+                            <section class="columns no-margin">
+                                <article class="column is-4">Diretores participantes: </article>
+                                <article class="column is-8">
+                                    <input type="text" placeholder="Ex.: Quentin Tarantino" class="input flat">
+                                </article>
+                            </section>
+                            <section class="columns has-text-right no-margin">
+                                <article class="column is-11">
+                                    <button type="button" class="button is-link" @click="advanced = false">Cancelar</button>
+                                    <button type="submit" class="button is-primary">Pesquisar</button>
+                                </article>
+                            </section>
+                        </div>
                     </section>
                 </form>
                 <section class="right">
@@ -129,7 +174,8 @@
             data: {
                 movies: data,
                 active: null,
-                index: -1
+                index: -1,
+                advanced: false
             },
             created: loadAssets,
             methods: {

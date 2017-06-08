@@ -34,24 +34,61 @@ header.is-primary
         margin-top: -3px
     .notification a
         text-decoration: none !important
-    height: 3.5rem
+    $h: 3.5rem
+    height: $h
+    $ml: 30px
+    $box: calc(#{$h} - 21px)
     .search-area
+        &.is-active
+            border-bottom: 0 !important
         margin: 0 20px
         padding-top: 0px
         margin-top: -5px
         width: 50%
         height: calc(100% + 10px)
         background-color: white
-        //border: thin solid #eee
+        border: thin solid $border
         border-radius: 3px
-        input
+        .control
+            display: inline-block
             background-color: transparent
-            box-shadow: none
             border: 0
             width: 94%
-        input ~ i
+            input
+                border: 0
+                box-shadow: none
+        .control ~ i
             font-size: 1.3rem
-            margin-top: 5px
+            margin-top: 10px
+        .advanced-search
+            hr
+                display: block
+                height: 1px
+                border: 0
+                background-color: rgba($border, 0.5)
+                margin: 0 0 1.3rem (-$ml)
+                padding: 0;
+                width: calc(100% + #{$ml})
+            .columns
+                @extend .is-gapless
+                &:first-child
+                    padding-top: 10px !important
+            .flat
+                margin-top: -8px
+                width: 94%
+            @extend .has-shadow
+            position: absolute
+            top: $box
+            left: -1px
+            border: thin solid $border
+            border-top: 0
+            background-color: white
+            border-bottom-left-radius: 3px
+            border-bottom-right-radius: 3px
+            min-height: 300px
+            padding: 0 0 10px $ml
+            width: calc(100% + 2px)
+            z-index: 10
     & > div
         line-height: 3.5rem
     i

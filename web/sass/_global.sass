@@ -3,12 +3,26 @@ body, html
     overflow: auto
 .has-shadow
     @extend .nav.has-shadow
+.relative
+    position: relative !important
+input.flat
+    border: 0
+    box-shadow: none
+    border-radius: 0
+    border-bottom: 2px solid $border !important
+    padding: 0
 .white
     color: white !important
 .primary, .primary:before
     color: $primary !important
 .pointer
     cursor: pointer
+.no-padding-top
+    padding-top: 0 !important
+.no-margin
+    margin-top: 0 !important
+    margin-left: 0 !important
+    margin-right: 0 !important
 .ghost
     opacity: 0.7
     &:hover
