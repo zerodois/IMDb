@@ -37,12 +37,14 @@ public class Search extends HttpServlet {
             throws ServletException, IOException {
         String term = request.getParameter("term");
         int page = 0;
+        final int results_per_page = 16;
         try {
             if (request.getParameter("page") != null)
                 page = Integer.parseInt(request.getParameter("page"));
             MovieDAO m = new MovieDAO();
-            request.setAttribute("results_per_page", m.getResultsPerPage());
-            request.setAttribute("movies", m.search(term, page));
+            model.Search bean = new model.Search(term, results_per_page, page);
+            request.setAttribute("results_per_page", results_per_page);
+            request.setAttribute("movies", m.search(bean));
             request.setAttribute("term", term);
             request.setAttribute("total", m.getTotalFound());
             request.setAttribute("page", page);

@@ -8,6 +8,7 @@ package persistence;
 import java.sql.*;
 import java.util.*;
 import model.Movie;
+import model.Search;
 /**
  *
  * @author felipe
@@ -25,7 +26,9 @@ public class MovieDAO {
     public int getTotalFound () {
         return total;
     }
-    public List<Movie> search(String title, int page) throws SQLException {
+    public List<Movie> search(Search search) throws SQLException {
+        int page = search.getPage();
+        String title = search.getTitle();
         String sql = "SELECT count(1) over() as total, * FROM movies "
             + "WHERE title NOT ilike '%(VG)%' AND title NOT ILIKE '%(V)%' AND title NOT ILIKE '%(TV)%' AND title NOT ILIKE '%\"%' AND title ilike '%" + title + "%'"
             + "limit " + results_per_page + " offset " + (page * results_per_page);
