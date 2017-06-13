@@ -31,8 +31,14 @@
                       <p class="image float-left">
                         <img :src="active.photo">
                       </p>
-                      <div class="film-content content float-left" style="background-color: tomato;">
+                      <div class="film-content content float-left">
                           <h4 class="has-text-centered">{{ active.title }}</h4>
+                          <div v-if="active.data">
+                                <label for="">Linguagens: </label><span v-for="l in active.data.languages">{{ l.name }}; </span><br>
+                                <label for="">Gêneros: </label><span v-for="g in active.data.genres">{{ g.name }}; </span><br>
+                                <div v-if="active.data.directors.length > 1" for=""><label>Principais diretores: </label><span v-for="i in Math.min(5, active.data.directors.length)">{{ active.data.directors[i-1].name }}; </span><br></div>
+                                <div v-if="active.data.directors.length == 1" for=""><label>Diretor: </label><span>{{ active.data.directors[0].name }}; </span></div><br>                              
+                          </div>
                       </div>
                     </section>
                 </div>
@@ -178,15 +184,15 @@
                                             link += "&actors=" + s;
                                 %>
                                 <% int current = (Integer)request.getAttribute("page"); %>
-                                <% if (current >= 5) { %>
+                                <% if (current >= 4) { %>
                                     <li><a class="pagination-link" href="search?<%= link %>&page=0">1</a></li>
                                     ...
                                 <% } %>
 
-                                <% for (int i=Math.max(current-3, 0); i <= Math.min( Math.max(4, current + 1), pages); i++) { %>
+                                <% for (int i=Math.max(current-2, 0); i <= Math.min( Math.max(4, current + 2), pages); i++) { %>
                                     <li><a class="pagination-link <%= i==current ? "is-current" : "" %> " href="search?<%= link %>&page=<%= i %>"><%= i+1 %></a></li>
                                 <% } %>
-                                <% if (pages > 5 && pages-current >= 4) { %>
+                                <% if (pages > 5 && pages-current >= 3) { %>
                                     ...
                                     <li><a class="pagination-link" href="search?<%= link %>&page=<%= pages %>"><%= pages+1 %></a></li>
                                 <% } %>
@@ -204,7 +210,7 @@
         <% ArrayList<Movie> m = (ArrayList<Movie>)request.getAttribute("movies"); %>
         var data = [];
         <% for (Movie item : m) { %>
-            data.push({ title: `<%= item.getTitle().replaceAll("\\([0-9]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
+            data.push({ id: <%= item.getId() %>, title: `<%= item.getTitle().replaceAll("\\([0-9]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
         <% } %>
 
         <% ArrayList<Director> d = (ArrayList<Director>)request.getAttribute("directors"); %>
@@ -254,11 +260,19 @@
         }
         
         function setActive (active, index) {
-            this.active.data = null;
-            this.active = active;
+            //if (this.active)
+                //this.active.data = null;
+            var self = this;
             this.index = index;
-            this.$http(`api/load?id=${active.id}`)
-                .then(json => active.data = json.body.data)
+            if (!active) {
+                this.active = active;
+                return false;
+            }
+            this.$http.get('api/load?id=' + active.id)
+                .then(json => {
+                    active.data = json.body.data;
+                    self.active = active;
+                });
         }
         
         var app = new Vue({

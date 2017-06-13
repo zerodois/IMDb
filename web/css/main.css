@@ -4425,6 +4425,7 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
     max-width: 40%; }
 
 .film-content {
+  background-color: transparent;
   width: 58%;
   margin-left: 10px; }
 
