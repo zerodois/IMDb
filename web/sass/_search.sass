@@ -6,6 +6,13 @@
         height: 70vh
         width: auto
         border-radius: 5px
+.modal-content
+    .image
+        max-width: 40%
+    width: 60%
+.film-content
+    width: 58%
+    margin-left: 10px
 header.is-primary
     background-color: $primary
 .empty-search
@@ -49,6 +56,9 @@ header.is-primary
         background-color: white
         border: thin solid $border
         border-radius: 3px
+        .bootstrap-select, .select.search
+            font-size: $select-font
+            @extend .flat
         .control
             display: inline-block
             background-color: transparent

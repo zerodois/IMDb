@@ -30,7 +30,7 @@
                         <div class="column is-10">
                             <div class="field">
                                 <p class="control">
-                                    <input class="input search" autocomplete="off" name="term" type="text" placeholder="">
+                                    <input class="input search" autocomplete="off" name="title" type="text" placeholder="">
                                 </p>
                            </div>                     
                         </div>

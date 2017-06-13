@@ -9,44 +9,35 @@ package model;
  *
  * @author felipe
  */
-public class Movie extends Json {
+public class Director extends Json {
+    private String name;
     private int id;
-    private String title, year;
     private final Json json;
-
-    public Movie () {
+    
+    public Director () {
         json = new Json();
     }
-    
+
     public int getId() {
         return id;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
     
     @Override
     public String serialize() {
         json.addItem("id", id);
-        json.addItem("title", title);
-        json.addItem("year", year);
+        json.addItem("name", name.replace("\"", "\\\""));
         return json.serialize();
     }
 }

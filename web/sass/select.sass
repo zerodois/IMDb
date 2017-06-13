@@ -1,0 +1,55 @@
+$button-size: 2.25rem
+.btn-group.bootstrap-select
+    @extend .select
+    @extend .is-fullwidth
+    @extend .pointer
+    height: auto
+    position: relative
+    &.open
+        .dropdown-menu.open
+            display: block       
+    .dropdown-menu.open
+        top: calc( #{$button-size} + 2px )
+        left: 0
+        position: absolute
+        width: 100%
+        z-index: 15
+        display: none
+        .inner
+            margin-top: 10px
+            padding: 0 0 15px 10px
+        background-color: white
+        border: thin solid $border
+        padding: 1rem 1rem 0.6rem 1rem
+        border-radius: 3px
+    input
+        @extend .input
+    select
+        display: none
+    li
+        a
+            color: #333
+        &.selected a
+            color: $primary
+    &:after
+        top: 1.125rem
+    .hidden
+        display: none
+    .active
+        display: block
+    & > button
+        @extend .pointer
+        border-radius: 3px
+        margin-bottom: 2px
+        padding-left: 10px
+        background: transparent
+        outline: none
+        border: thin solid $border
+        $s: 2px
+        font-size: $select-font
+        color: #363636
+        margin-left: - $s
+        width: calc( 100% + #{$s})
+        height: $button-size
+
+

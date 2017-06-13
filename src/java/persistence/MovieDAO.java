@@ -7,6 +7,9 @@ package persistence;
 
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Data;
 import model.Movie;
 import model.Search;
 /**
@@ -20,18 +23,40 @@ public class MovieDAO {
     public MovieDAO() throws DAOException{
       this.conn = ConnectionFactory.getConnection();
     }
-    public int getResultsPerPage () {
-        return results_per_page;
-    }
     public int getTotalFound () {
         return total;
     }
+    public String empty (String s) {
+        if (s == null)
+            return "";
+        return s.replace("'", "''");
+    }
+    public String formalize(String []v) {
+        if (v == null)
+            return "null";
+        String s = "ARRAY[" + v[0];
+        for (int i=1; i < v.length; i++)
+            s += ", " + v[i];
+        s += "]";
+        return s;
+    }
+        
     public List<Movie> search(Search search) throws SQLException {
         int page = search.getPage();
-        String title = search.getTitle();
-        String sql = "SELECT count(1) over() as total, * FROM movies "
-            + "WHERE title NOT ilike '%(VG)%' AND title NOT ILIKE '%(V)%' AND title NOT ILIKE '%(TV)%' AND title NOT ILIKE '%\"%' AND title ilike '%" + title + "%'"
-            + "limit " + results_per_page + " offset " + (page * results_per_page);
+        int res = search.getResults_per_page();
+        String title = empty(search.getTitle());
+        String year = empty(search.getYear());
+        String genre = empty(search.getGenre());
+        String language = empty(search.getLanguage());
+        String arr[] = search.getActors();
+        String actors = formalize(arr);
+        String dir[] = search.getDirectors();
+        String directors = formalize(dir);
+        String category = search.getCategory();
+        if (category == null)
+            category = "M";
+        String sql = "SELECT * FROM search_movies('"+title+"','"+category+"','"+year+"','"+genre+"','"+language+"',"+directors+", "+actors+","+res+", "+(page*res)+")";
+        Logger.getLogger(controllers.Search.class.getName()).log(Level.SEVERE, sql);
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(sql);
         List<Movie> list = new ArrayList<>();
@@ -41,8 +66,8 @@ public class MovieDAO {
                 total = result.getInt("total");
             Movie m = new Movie();
             m.setId(result.getInt("id"));
-            m.setYear(result.getString("year"));
-            m.setTitle(result.getString("title"));
+            m.setYear(result.getString("year_movie"));
+            m.setTitle(result.getString("title_movie"));
             list.add(m);
         }
         return list;

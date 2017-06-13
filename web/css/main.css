@@ -2,6 +2,7 @@
 /* Fonts */
 /* Alpha */
 /* Colors */
+/* Sizes */
 /*! bulma.io v0.4.1 | MIT License | github.com/jgthms/bulma */
 @keyframes spinAround {
   from {
@@ -1107,7 +1108,7 @@ a.box:active {
     border-color: #dbdbdb;
     box-shadow: none;
     opacity: 0.5; }
-  .button.is-fullwidth {
+  .button.is-fullwidth, .button.btn-group.bootstrap-select {
     display: flex;
     width: 100%; }
   .button.is-loading {
@@ -1240,7 +1241,7 @@ input[type="submit"].button {
   .content.is-large {
     font-size: 1.5rem; }
 
-.input,
+.input, .btn-group.bootstrap-select input,
 .textarea {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -1265,88 +1266,89 @@ input[type="submit"].button {
   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   max-width: 100%;
   width: 100%; }
-  .input:focus, .input.is-focused, .input:active, .input.is-active,
+  .input:focus, .btn-group.bootstrap-select input:focus, .input.is-focused, .btn-group.bootstrap-select input.is-focused, .input:active, .btn-group.bootstrap-select input:active, .input.is-active, .btn-group.bootstrap-select input.is-active,
   .textarea:focus,
   .textarea.is-focused,
   .textarea:active,
   .textarea.is-active {
     outline: none; }
-  .input[disabled],
+  .input[disabled], .btn-group.bootstrap-select input[disabled],
   .textarea[disabled] {
     cursor: not-allowed; }
-  .input:hover, .input.is-hovered,
+  .input:hover, .btn-group.bootstrap-select input:hover, .input.is-hovered, .btn-group.bootstrap-select input.is-hovered,
   .textarea:hover,
   .textarea.is-hovered {
     border-color: #b5b5b5; }
-  .input:focus, .input.is-focused, .input:active, .input.is-active,
+  .input:focus, .btn-group.bootstrap-select input:focus, .input.is-focused, .btn-group.bootstrap-select input.is-focused, .input:active, .btn-group.bootstrap-select input:active, .input.is-active, .btn-group.bootstrap-select input.is-active,
   .textarea:focus,
   .textarea.is-focused,
   .textarea:active,
   .textarea.is-active {
     border-color: #00d1b2; }
-  .input[disabled],
+  .input[disabled], .btn-group.bootstrap-select input[disabled],
   .textarea[disabled] {
     background-color: whitesmoke;
     border-color: whitesmoke;
     box-shadow: none;
     color: #7a7a7a; }
-    .input[disabled]::-moz-placeholder,
+    .input[disabled]::-moz-placeholder, .btn-group.bootstrap-select input[disabled]::-moz-placeholder,
     .textarea[disabled]::-moz-placeholder {
       color: rgba(54, 54, 54, 0.3); }
-    .input[disabled]::-webkit-input-placeholder,
+    .input[disabled]::-webkit-input-placeholder, .btn-group.bootstrap-select input[disabled]::-webkit-input-placeholder,
     .textarea[disabled]::-webkit-input-placeholder {
       color: rgba(54, 54, 54, 0.3); }
-    .input[disabled]:-moz-placeholder,
+    .input[disabled]:-moz-placeholder, .btn-group.bootstrap-select input[disabled]:-moz-placeholder,
     .textarea[disabled]:-moz-placeholder {
       color: rgba(54, 54, 54, 0.3); }
-    .input[disabled]:-ms-input-placeholder,
+    .input[disabled]:-ms-input-placeholder, .btn-group.bootstrap-select input[disabled]:-ms-input-placeholder,
     .textarea[disabled]:-ms-input-placeholder {
       color: rgba(54, 54, 54, 0.3); }
-  .input[type="search"],
+  .input[type="search"], .btn-group.bootstrap-select input[type="search"],
   .textarea[type="search"] {
     border-radius: 290486px; }
-  .input.is-white,
+  .input.is-white, .btn-group.bootstrap-select input.is-white,
   .textarea.is-white {
     border-color: white; }
-  .input.is-black,
+  .input.is-black, .btn-group.bootstrap-select input.is-black,
   .textarea.is-black {
     border-color: #0a0a0a; }
-  .input.is-light,
+  .input.is-light, .btn-group.bootstrap-select input.is-light,
   .textarea.is-light {
     border-color: whitesmoke; }
-  .input.is-dark,
+  .input.is-dark, .btn-group.bootstrap-select input.is-dark,
   .textarea.is-dark {
     border-color: #363636; }
-  .input.is-primary,
+  .input.is-primary, .btn-group.bootstrap-select input.is-primary,
   .textarea.is-primary {
     border-color: #00d1b2; }
-  .input.is-info,
+  .input.is-info, .btn-group.bootstrap-select input.is-info,
   .textarea.is-info {
     border-color: #3273dc; }
-  .input.is-success,
+  .input.is-success, .btn-group.bootstrap-select input.is-success,
   .textarea.is-success {
     border-color: #23d160; }
-  .input.is-warning,
+  .input.is-warning, .btn-group.bootstrap-select input.is-warning,
   .textarea.is-warning {
     border-color: #ffdd57; }
-  .input.is-danger,
+  .input.is-danger, .btn-group.bootstrap-select input.is-danger,
   .textarea.is-danger {
     border-color: #ff3860; }
-  .input.is-small,
+  .input.is-small, .btn-group.bootstrap-select input.is-small,
   .textarea.is-small {
     border-radius: 2px;
     font-size: 0.75rem; }
-  .input.is-medium,
+  .input.is-medium, .btn-group.bootstrap-select input.is-medium,
   .textarea.is-medium {
     font-size: 1.25rem; }
-  .input.is-large,
+  .input.is-large, .btn-group.bootstrap-select input.is-large,
   .textarea.is-large {
     font-size: 1.5rem; }
-  .input.is-fullwidth,
-  .textarea.is-fullwidth {
+  .input.is-fullwidth, .input.btn-group.bootstrap-select, .btn-group.bootstrap-select input.btn-group.bootstrap-select, .btn-group.bootstrap-select input.is-fullwidth,
+  .textarea.is-fullwidth,
+  .textarea.btn-group.bootstrap-select {
     display: block;
     width: 100%; }
-  .input.is-inline,
+  .input.is-inline, .btn-group.bootstrap-select input.is-inline,
   .textarea.is-inline {
     display: inline;
     width: auto; }
@@ -1380,12 +1382,12 @@ input[type="submit"].button {
 .radio + .radio {
   margin-left: 0.5em; }
 
-.select {
+.select, .btn-group.bootstrap-select {
   display: inline-block;
   height: 2.25em;
   position: relative;
   vertical-align: top; }
-  .select:after {
+  .select:after, .btn-group.bootstrap-select:after {
     border: 1px solid #00d1b2;
     border-right: 0;
     border-top: 0;
@@ -1400,7 +1402,7 @@ input[type="submit"].button {
     right: 1.125em;
     top: 50%;
     z-index: 4; }
-  .select select {
+  .select select, .btn-group.bootstrap-select select {
     -moz-appearance: none;
     -webkit-appearance: none;
     align-items: center;
@@ -1426,67 +1428,67 @@ input[type="submit"].button {
     font-size: 1em;
     outline: none;
     padding-right: 2.5em; }
-    .select select:focus, .select select.is-focused, .select select:active, .select select.is-active {
+    .select select:focus, .btn-group.bootstrap-select select:focus, .select select.is-focused, .btn-group.bootstrap-select select.is-focused, .select select:active, .btn-group.bootstrap-select select:active, .select select.is-active, .btn-group.bootstrap-select select.is-active {
       outline: none; }
-    .select select[disabled] {
+    .select select[disabled], .btn-group.bootstrap-select select[disabled] {
       cursor: not-allowed; }
-    .select select:hover, .select select.is-hovered {
+    .select select:hover, .btn-group.bootstrap-select select:hover, .select select.is-hovered, .btn-group.bootstrap-select select.is-hovered {
       border-color: #b5b5b5; }
-    .select select:focus, .select select.is-focused, .select select:active, .select select.is-active {
+    .select select:focus, .btn-group.bootstrap-select select:focus, .select select.is-focused, .btn-group.bootstrap-select select.is-focused, .select select:active, .btn-group.bootstrap-select select:active, .select select.is-active, .btn-group.bootstrap-select select.is-active {
       border-color: #00d1b2; }
-    .select select[disabled] {
+    .select select[disabled], .btn-group.bootstrap-select select[disabled] {
       background-color: whitesmoke;
       border-color: whitesmoke;
       box-shadow: none;
       color: #7a7a7a; }
-      .select select[disabled]::-moz-placeholder {
+      .select select[disabled]::-moz-placeholder, .btn-group.bootstrap-select select[disabled]::-moz-placeholder {
         color: rgba(54, 54, 54, 0.3); }
-      .select select[disabled]::-webkit-input-placeholder {
+      .select select[disabled]::-webkit-input-placeholder, .btn-group.bootstrap-select select[disabled]::-webkit-input-placeholder {
         color: rgba(54, 54, 54, 0.3); }
-      .select select[disabled]:-moz-placeholder {
+      .select select[disabled]:-moz-placeholder, .btn-group.bootstrap-select select[disabled]:-moz-placeholder {
         color: rgba(54, 54, 54, 0.3); }
-      .select select[disabled]:-ms-input-placeholder {
+      .select select[disabled]:-ms-input-placeholder, .btn-group.bootstrap-select select[disabled]:-ms-input-placeholder {
         color: rgba(54, 54, 54, 0.3); }
-    .select select:hover {
+    .select select:hover, .btn-group.bootstrap-select select:hover {
       border-color: #b5b5b5; }
-    .select select::-ms-expand {
+    .select select::-ms-expand, .btn-group.bootstrap-select select::-ms-expand {
       display: none; }
-    .select select[disabled]:hover {
+    .select select[disabled]:hover, .btn-group.bootstrap-select select[disabled]:hover {
       border-color: whitesmoke; }
-  .select:hover:after {
+  .select:hover:after, .btn-group.bootstrap-select:hover:after {
     border-color: #363636; }
-  .select.is-white select {
+  .select.is-white select, .is-white.btn-group.bootstrap-select select {
     border-color: white; }
-  .select.is-black select {
+  .select.is-black select, .is-black.btn-group.bootstrap-select select {
     border-color: #0a0a0a; }
-  .select.is-light select {
+  .select.is-light select, .is-light.btn-group.bootstrap-select select {
     border-color: whitesmoke; }
-  .select.is-dark select {
+  .select.is-dark select, .is-dark.btn-group.bootstrap-select select {
     border-color: #363636; }
-  .select.is-primary select {
+  .select.is-primary select, .is-primary.btn-group.bootstrap-select select {
     border-color: #00d1b2; }
-  .select.is-info select {
+  .select.is-info select, .is-info.btn-group.bootstrap-select select {
     border-color: #3273dc; }
-  .select.is-success select {
+  .select.is-success select, .is-success.btn-group.bootstrap-select select {
     border-color: #23d160; }
-  .select.is-warning select {
+  .select.is-warning select, .is-warning.btn-group.bootstrap-select select {
     border-color: #ffdd57; }
-  .select.is-danger select {
+  .select.is-danger select, .is-danger.btn-group.bootstrap-select select {
     border-color: #ff3860; }
-  .select.is-small {
+  .select.is-small, .is-small.btn-group.bootstrap-select {
     border-radius: 2px;
     font-size: 0.75rem; }
-  .select.is-medium {
+  .select.is-medium, .is-medium.btn-group.bootstrap-select {
     font-size: 1.25rem; }
-  .select.is-large {
+  .select.is-large, .is-large.btn-group.bootstrap-select {
     font-size: 1.5rem; }
-  .select.is-disabled:after {
+  .select.is-disabled:after, .is-disabled.btn-group.bootstrap-select:after {
     border-color: #7a7a7a; }
-  .select.is-fullwidth {
+  .select.is-fullwidth, .btn-group.bootstrap-select {
     width: 100%; }
-    .select.is-fullwidth select {
+    .select.is-fullwidth select, .btn-group.bootstrap-select select {
       width: 100%; }
-  .select.is-loading:after {
+  .select.is-loading:after, .is-loading.btn-group.bootstrap-select:after {
     animation: spinAround 500ms infinite linear;
     border: 2px solid #dbdbdb;
     border-radius: 290486px;
@@ -1550,43 +1552,82 @@ input[type="submit"].button {
     margin-right: -1px; }
     .field.has-addons .control:first-child .button,
     .field.has-addons .control:first-child .input,
-    .field.has-addons .control:first-child .select select {
+    .field.has-addons .control:first-child .btn-group.bootstrap-select input, .btn-group.bootstrap-select
+    .field.has-addons .control:first-child input,
+    .field.has-addons .control:first-child .select select,
+    .field.has-addons .control:first-child .btn-group.bootstrap-select select {
       border-bottom-left-radius: 3px;
       border-top-left-radius: 3px; }
     .field.has-addons .control:last-child .button,
     .field.has-addons .control:last-child .input,
-    .field.has-addons .control:last-child .select select {
+    .field.has-addons .control:last-child .btn-group.bootstrap-select input, .btn-group.bootstrap-select
+    .field.has-addons .control:last-child input,
+    .field.has-addons .control:last-child .select select,
+    .field.has-addons .control:last-child .btn-group.bootstrap-select select {
       border-bottom-right-radius: 3px;
       border-top-right-radius: 3px; }
     .field.has-addons .control .button,
     .field.has-addons .control .input,
-    .field.has-addons .control .select select {
+    .field.has-addons .control .btn-group.bootstrap-select input, .btn-group.bootstrap-select
+    .field.has-addons .control input,
+    .field.has-addons .control .select select,
+    .field.has-addons .control .btn-group.bootstrap-select select {
       border-radius: 0; }
       .field.has-addons .control .button:hover, .field.has-addons .control .button.is-hovered,
       .field.has-addons .control .input:hover,
+      .field.has-addons .control .btn-group.bootstrap-select input:hover, .btn-group.bootstrap-select
+      .field.has-addons .control input:hover,
       .field.has-addons .control .input.is-hovered,
+      .field.has-addons .control .btn-group.bootstrap-select input.is-hovered, .btn-group.bootstrap-select
+      .field.has-addons .control input.is-hovered,
       .field.has-addons .control .select select:hover,
-      .field.has-addons .control .select select.is-hovered {
+      .field.has-addons .control .btn-group.bootstrap-select select:hover,
+      .field.has-addons .control .select select.is-hovered,
+      .field.has-addons .control .btn-group.bootstrap-select select.is-hovered {
         z-index: 2; }
       .field.has-addons .control .button:focus, .field.has-addons .control .button.is-focused, .field.has-addons .control .button:active, .field.has-addons .control .button.is-active,
       .field.has-addons .control .input:focus,
+      .field.has-addons .control .btn-group.bootstrap-select input:focus, .btn-group.bootstrap-select
+      .field.has-addons .control input:focus,
       .field.has-addons .control .input.is-focused,
+      .field.has-addons .control .btn-group.bootstrap-select input.is-focused, .btn-group.bootstrap-select
+      .field.has-addons .control input.is-focused,
       .field.has-addons .control .input:active,
+      .field.has-addons .control .btn-group.bootstrap-select input:active, .btn-group.bootstrap-select
+      .field.has-addons .control input:active,
       .field.has-addons .control .input.is-active,
+      .field.has-addons .control .btn-group.bootstrap-select input.is-active, .btn-group.bootstrap-select
+      .field.has-addons .control input.is-active,
       .field.has-addons .control .select select:focus,
+      .field.has-addons .control .btn-group.bootstrap-select select:focus,
       .field.has-addons .control .select select.is-focused,
+      .field.has-addons .control .btn-group.bootstrap-select select.is-focused,
       .field.has-addons .control .select select:active,
-      .field.has-addons .control .select select.is-active {
+      .field.has-addons .control .btn-group.bootstrap-select select:active,
+      .field.has-addons .control .select select.is-active,
+      .field.has-addons .control .btn-group.bootstrap-select select.is-active {
         z-index: 3; }
         .field.has-addons .control .button:focus:hover, .field.has-addons .control .button.is-focused:hover, .field.has-addons .control .button:active:hover, .field.has-addons .control .button.is-active:hover,
         .field.has-addons .control .input:focus:hover,
+        .field.has-addons .control .btn-group.bootstrap-select input:focus:hover, .btn-group.bootstrap-select
+        .field.has-addons .control input:focus:hover,
         .field.has-addons .control .input.is-focused:hover,
+        .field.has-addons .control .btn-group.bootstrap-select input.is-focused:hover, .btn-group.bootstrap-select
+        .field.has-addons .control input.is-focused:hover,
         .field.has-addons .control .input:active:hover,
+        .field.has-addons .control .btn-group.bootstrap-select input:active:hover, .btn-group.bootstrap-select
+        .field.has-addons .control input:active:hover,
         .field.has-addons .control .input.is-active:hover,
+        .field.has-addons .control .btn-group.bootstrap-select input.is-active:hover, .btn-group.bootstrap-select
+        .field.has-addons .control input.is-active:hover,
         .field.has-addons .control .select select:focus:hover,
+        .field.has-addons .control .btn-group.bootstrap-select select:focus:hover,
         .field.has-addons .control .select select.is-focused:hover,
+        .field.has-addons .control .btn-group.bootstrap-select select.is-focused:hover,
         .field.has-addons .control .select select:active:hover,
-        .field.has-addons .control .select select.is-active:hover {
+        .field.has-addons .control .btn-group.bootstrap-select select:active:hover,
+        .field.has-addons .control .select select.is-active:hover,
+        .field.has-addons .control .btn-group.bootstrap-select select.is-active:hover {
           z-index: 4; }
     .field.has-addons .control.is-expanded {
       flex-grow: 1;
@@ -1671,29 +1712,29 @@ input[type="submit"].button {
     top: 0;
     width: 2.25em;
     z-index: 4; }
-  .control.has-icon .input:focus + .icon {
+  .control.has-icon .input:focus + .icon, .control.has-icon .btn-group.bootstrap-select input:focus + .icon, .btn-group.bootstrap-select .control.has-icon input:focus + .icon {
     color: #7a7a7a; }
-  .control.has-icon .input.is-small + .icon {
+  .control.has-icon .input.is-small + .icon, .control.has-icon .btn-group.bootstrap-select input.is-small + .icon, .btn-group.bootstrap-select .control.has-icon input.is-small + .icon {
     font-size: 0.75rem; }
-  .control.has-icon .input.is-medium + .icon {
+  .control.has-icon .input.is-medium + .icon, .control.has-icon .btn-group.bootstrap-select input.is-medium + .icon, .btn-group.bootstrap-select .control.has-icon input.is-medium + .icon {
     font-size: 1.25rem; }
-  .control.has-icon .input.is-large + .icon {
+  .control.has-icon .input.is-large + .icon, .control.has-icon .btn-group.bootstrap-select input.is-large + .icon, .btn-group.bootstrap-select .control.has-icon input.is-large + .icon {
     font-size: 1.5rem; }
   .control.has-icon:not(.has-icon-right) .icon {
     left: 0; }
-  .control.has-icon:not(.has-icon-right) .input {
+  .control.has-icon:not(.has-icon-right) .input, .control.has-icon:not(.has-icon-right) .btn-group.bootstrap-select input, .btn-group.bootstrap-select .control.has-icon:not(.has-icon-right) input {
     padding-left: 2.25em; }
   .control.has-icon.has-icon-right .icon {
     right: 0; }
-  .control.has-icon.has-icon-right .input {
+  .control.has-icon.has-icon-right .input, .control.has-icon.has-icon-right .btn-group.bootstrap-select input, .btn-group.bootstrap-select .control.has-icon.has-icon-right input {
     padding-right: 2.25em; }
-  .control.has-icons-left .input:focus ~ .icon, .control.has-icons-right .input:focus ~ .icon {
+  .control.has-icons-left .input:focus ~ .icon, .control.has-icons-left .btn-group.bootstrap-select input:focus ~ .icon, .btn-group.bootstrap-select .control.has-icons-left input:focus ~ .icon, .control.has-icons-right .input:focus ~ .icon, .control.has-icons-right .btn-group.bootstrap-select input:focus ~ .icon, .btn-group.bootstrap-select .control.has-icons-right input:focus ~ .icon {
     color: #7a7a7a; }
-  .control.has-icons-left .input.is-small ~ .icon, .control.has-icons-right .input.is-small ~ .icon {
+  .control.has-icons-left .input.is-small ~ .icon, .control.has-icons-left .btn-group.bootstrap-select input.is-small ~ .icon, .btn-group.bootstrap-select .control.has-icons-left input.is-small ~ .icon, .control.has-icons-right .input.is-small ~ .icon, .control.has-icons-right .btn-group.bootstrap-select input.is-small ~ .icon, .btn-group.bootstrap-select .control.has-icons-right input.is-small ~ .icon {
     font-size: 0.75rem; }
-  .control.has-icons-left .input.is-medium ~ .icon, .control.has-icons-right .input.is-medium ~ .icon {
+  .control.has-icons-left .input.is-medium ~ .icon, .control.has-icons-left .btn-group.bootstrap-select input.is-medium ~ .icon, .btn-group.bootstrap-select .control.has-icons-left input.is-medium ~ .icon, .control.has-icons-right .input.is-medium ~ .icon, .control.has-icons-right .btn-group.bootstrap-select input.is-medium ~ .icon, .btn-group.bootstrap-select .control.has-icons-right input.is-medium ~ .icon {
     font-size: 1.25rem; }
-  .control.has-icons-left .input.is-large ~ .icon, .control.has-icons-right .input.is-large ~ .icon {
+  .control.has-icons-left .input.is-large ~ .icon, .control.has-icons-left .btn-group.bootstrap-select input.is-large ~ .icon, .btn-group.bootstrap-select .control.has-icons-left input.is-large ~ .icon, .control.has-icons-right .input.is-large ~ .icon, .control.has-icons-right .btn-group.bootstrap-select input.is-large ~ .icon, .btn-group.bootstrap-select .control.has-icons-right input.is-large ~ .icon {
     font-size: 1.5rem; }
   .control.has-icons-left .icon, .control.has-icons-right .icon {
     color: #dbdbdb;
@@ -1703,11 +1744,11 @@ input[type="submit"].button {
     top: 0;
     width: 2.25em;
     z-index: 4; }
-  .control.has-icons-left .input {
+  .control.has-icons-left .input, .control.has-icons-left .btn-group.bootstrap-select input, .btn-group.bootstrap-select .control.has-icons-left input {
     padding-left: 2.25em; }
   .control.has-icons-left .icon.is-left {
     left: 0; }
-  .control.has-icons-right .input {
+  .control.has-icons-right .input, .control.has-icons-right .btn-group.bootstrap-select input, .btn-group.bootstrap-select .control.has-icons-right input {
     padding-right: 2.25em; }
   .control.has-icons-right .icon.is-right {
     right: 0; }
@@ -3104,7 +3145,7 @@ label.panel-block {
     background-color: white;
     border-color: #dbdbdb;
     border-bottom-color: transparent !important; }
-  .tabs.is-fullwidth li {
+  .tabs.is-fullwidth li, .tabs.btn-group.bootstrap-select li {
     flex-grow: 1;
     flex-shrink: 0; }
   .tabs.is-toggle a {
@@ -4281,10 +4322,16 @@ body, html {
   height: 100%;
   overflow: auto; }
 
+.float-left {
+  float: left !important; }
+
+.overflow {
+  overflow: hidden; }
+
 .relative {
   position: relative !important; }
 
-input.flat {
+input.flat, .header .search-area input.bootstrap-select, .header .search-area input.select.search, .header .search-area input.search.btn-group.bootstrap-select {
   border: 0;
   box-shadow: none;
   border-radius: 0;
@@ -4297,7 +4344,7 @@ input.flat {
 .primary, .primary:before {
   color: #00d1b2 !important; }
 
-.pointer {
+.pointer, .btn-group.bootstrap-select, .btn-group.bootstrap-select > button {
   cursor: pointer; }
 
 .no-padding-top {
@@ -4372,6 +4419,15 @@ input.flat {
   width: auto;
   border-radius: 5px; }
 
+.modal-content {
+  width: 60%; }
+  .modal-content .image {
+    max-width: 40%; }
+
+.film-content {
+  width: 58%;
+  margin-left: 10px; }
+
 header.is-primary {
   background-color: #00d1b2; }
 
@@ -4415,6 +4471,8 @@ header.is-primary {
     border-radius: 3px; }
     .header .search-area.is-active {
       border-bottom: 0 !important; }
+    .header .search-area .bootstrap-select, .header .search-area .select.search, .header .search-area .search.btn-group.bootstrap-select {
+      font-size: 0.9rem; }
     .header .search-area .control {
       display: inline-block;
       background-color: transparent;
@@ -4449,7 +4507,7 @@ header.is-primary {
         width: calc(100% + 30px); }
       .header .search-area .advanced-search .columns:first-child {
         padding-top: 10px !important; }
-      .header .search-area .advanced-search .flat {
+      .header .search-area .advanced-search .flat, .header .search-area .advanced-search .bootstrap-select, .header .search-area .advanced-search .select.search {
         margin-top: -8px;
         width: 94%; }
   .header > div {
@@ -4488,3 +4546,47 @@ header {
 
 #internal-error img {
   height: 70vh; }
+
+.btn-group.bootstrap-select {
+  height: auto;
+  position: relative; }
+  .btn-group.bootstrap-select.open .dropdown-menu.open {
+    display: block; }
+  .btn-group.bootstrap-select .dropdown-menu.open {
+    top: calc( 2.25rem + 2px);
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 15;
+    display: none;
+    background-color: white;
+    border: thin solid #dbdbdb;
+    padding: 1rem 1rem 0.6rem 1rem;
+    border-radius: 3px; }
+    .btn-group.bootstrap-select .dropdown-menu.open .inner {
+      margin-top: 10px;
+      padding: 0 0 15px 10px; }
+  .btn-group.bootstrap-select select {
+    display: none; }
+  .btn-group.bootstrap-select li a {
+    color: #333; }
+  .btn-group.bootstrap-select li.selected a {
+    color: #00d1b2; }
+  .btn-group.bootstrap-select:after {
+    top: 1.125rem; }
+  .btn-group.bootstrap-select .hidden {
+    display: none; }
+  .btn-group.bootstrap-select .active {
+    display: block; }
+  .btn-group.bootstrap-select > button {
+    border-radius: 3px;
+    margin-bottom: 2px;
+    padding-left: 10px;
+    background: transparent;
+    outline: none;
+    border: thin solid #dbdbdb;
+    font-size: 0.9rem;
+    color: #363636;
+    margin-left: -2px;
+    width: calc( 100% + 2px);
+    height: 2.25rem; }

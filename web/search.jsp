@@ -4,6 +4,9 @@
     Author     : felipe
 --%>
 
+<%@page import="model.Actor"%>
+<%@page import="model.Director"%>
+<%@page import="model.Search"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Movie"%>
@@ -12,7 +15,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <% String busca = request.getAttribute("search").toString(); %>
+        <% Search bean = (Search)request.getAttribute("search"); %>
+        <% String busca = bean.getTitle(); %>
         <title>IMDb | <%= busca %></title>
         <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
         <tag:include />
@@ -23,10 +27,13 @@
             <div id="movie-viewer" class="modal" :class="{ 'is-active' : active }" v-if="active">
                 <div class="modal-background"></div>
                 <div class="modal-content">
-                    <section class="box">
-                      <p class="image">
+                    <section class="box overflow">
+                      <p class="image float-left">
                         <img :src="active.photo">
                       </p>
+                      <div class="film-content content float-left" style="background-color: tomato;">
+                          <h4 class="has-text-centered">{{ active.title }}</h4>
+                      </div>
                     </section>
                 </div>
                 <button class="modal-close" @click="setActive(null)"></button>
@@ -40,7 +47,7 @@
                 <form action="/imdb/search" method="GET">
                     <section class="center search-area relative is-active">
                         <p class="control has-icons-left has-icons-right">
-                            <input name="term" class="input is-primary no-padding-top" value="<%= busca %>" placeholder="Título do filme" type="text" placeholder="Text input">
+                            <input name="title" class="input is-primary no-padding-top" value="<%= busca %>" placeholder="Título do filme" type="text" placeholder="Text input">
                             <span class="icon is-small is-left">
                               <i class="fa fa-search"></i>
                             </span>
@@ -51,31 +58,60 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Ano de lançamento: </article>
                                 <article class="column is-8">
-                                    <input type="text" placeholder="Ex.: 2004" class="input flat">
+                                    <input name="year" value="<%= bean.getYear() %>" type="number" placeholder="Ex.: 2004" class="input flat">
                                 </article>
                             </section>
                             <section class="columns no-margin">
                                 <article class="column is-4">Línguagem: </article>
                                 <article class="column is-8">
-                                    <input type="text" placeholder="Ex.: Português; Russo" class="input flat">
+                                    <!-- <input type="text" placeholder="Ex.: Português; Russo" class="input flat"> -->
+                                    <!-- <span class="select search is-fullwidth">
+                                        <select>
+                                          <option selected disabled>Select language</option>
+                                          <option v-for="lang in langs" :value="lang.name">{{ lang.name }}</option>
+                                        </select>
+                                    </span> -->
+                                    <select v-model="lang" name="language" title="Nenhuma linguagem selecionada" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
+                                        <option v-for="lang in langs" :value="lang.name">{{ lang.name }}</option>
+                                    </select>
                                 </article>
                             </section>
                             <section class="columns no-margin">
                                 <article class="column is-4">Gênero: </article>
                                 <article class="column is-8">
-                                    <input type="text" placeholder="Ex.: Drama; Suspense" class="input flat">
+                                    <select v-model="genre" name="genre" title="Nenhum gênero selecionado" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
+                                        <option v-for="genre in genres" :value="genre.name">{{ genre.name }}</option>
+                                    </select>
+                                </article>
+                            </section>
+                            <section class="columns no-margin">
+                                <article class="column is-4">Categoria: </article>
+                                <article class="column is-8">
+                                    <span class="select search is-fullwidth">
+                                        <select name="category">
+                                          <option value="M" <%= bean.getCategory() == "M" || bean.getCategory() == "" || bean.getCategory() == null ? "" : "" %>>Movie</option>
+                                          <option value="T" <%= bean.getCategory() == "T" ? "" : "" %>>TV Show</option>
+                                          <option value="E" <%= bean.getCategory() == "E" ? "" : "" %>>Episode</option>
+                                          <option value="V" <%= bean.getCategory() == "V" ? "" : "" %>>Video</option>
+                                          <option value="G" <%= bean.getCategory() == "G" ? "" : "" %>>Game</option>
+                                        </select>
+                                    </span>
                                 </article>
                             </section>
                             <section class="columns no-margin">
                                 <article class="column is-4">Atores envolvidos: </article>
                                 <article class="column is-8">
-                                    <input type="text" placeholder="Ex.: Lernardo DiCaprio; Sasha Gray" class="input flat">
+                                    <select v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
+                                        <option v-for="actor in actors" :value="actor.id">{{ actor.name }}</option>
+                                    </select>
                                 </article>
                             </section>
                             <section class="columns no-margin">
                                 <article class="column is-4">Diretores participantes: </article>
                                 <article class="column is-8">
-                                    <input type="text" placeholder="Ex.: Quentin Tarantino" class="input flat">
+                                    <select v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
+                                        <option v-for="director in directors" :value="director.id">{{ director.name }}</option>
+                                    </select>
                                 </article>
                             </section>
                             <section class="columns has-text-right no-margin">
@@ -128,9 +164,33 @@
                         <nav class="pagination is-centered">
                             <ul class="pagination-list">
                                 <% int pages = (int) Math.ceil(r/rp); %>
-                                <% for (int i=0; i <= pages; i++) { %>
-                                    <li><a class="pagination-link <%= i==(Integer)request.getAttribute("page") ? "is-current" : "" %> " href="search?term=<%= request.getAttribute("term") %>&page=<%= i %>"><%= i+1 %></a></li>
+                                <%
+                                    String link = "title=" + bean.getTitle();
+                                    link += "&year=" + bean.getYear();
+                                    link += "&category=" + bean.getCategory();
+                                    String[] d = bean.getDirectors();
+                                    String[] a = bean.getActors();
+                                    if (d != null)
+                                        for (String s : d)
+                                            link += "&directors=" + s;
+                                    if (a != null)
+                                        for (String s : a)
+                                            link += "&actors=" + s;
+                                %>
+                                <% int current = (Integer)request.getAttribute("page"); %>
+                                <% if (current >= 5) { %>
+                                    <li><a class="pagination-link" href="search?<%= link %>&page=0">1</a></li>
+                                    ...
                                 <% } %>
+
+                                <% for (int i=Math.max(current-3, 0); i <= Math.min( Math.max(4, current + 1), pages); i++) { %>
+                                    <li><a class="pagination-link <%= i==current ? "is-current" : "" %> " href="search?<%= link %>&page=<%= i %>"><%= i+1 %></a></li>
+                                <% } %>
+                                <% if (pages > 5 && pages-current >= 4) { %>
+                                    ...
+                                    <li><a class="pagination-link" href="search?<%= link %>&page=<%= pages %>"><%= pages+1 %></a></li>
+                                <% } %>
+
                             </ul>
                           </nav>
                     </div>
@@ -146,7 +206,23 @@
         <% for (Movie item : m) { %>
             data.push({ title: `<%= item.getTitle().replaceAll("\\([0-9]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
         <% } %>
+
+        <% ArrayList<Director> d = (ArrayList<Director>)request.getAttribute("directors"); %>
+        var directors = [];
+        var directorsAct = [];
+        <% for (Director item : d) { %>
+            directors.push({ name: `<%= item.getName() %>`, id: '<%= item.getId()%>'});
+            directorsAct.push(<%= item.getId()%>);
+        <% } %>
             
+        <% ArrayList<Actor> a = (ArrayList<Actor>)request.getAttribute("actors"); %>
+        var actors = [];
+        var actorsAct = [];
+        <% for (Actor item : a) { %>
+            actors.push({ name: `<%= item.getName() %>`, id: '<%= item.getId()%>'});
+            actorsAct.push(<%= item.getId()%>);
+        <% } %>
+    
         function format (json) {
             if (json.total_results > 0 && json.results[0].poster_path)
                 return 'http://image.tmdb.org/t/p/w500' + json.results[0].poster_path;
@@ -154,6 +230,17 @@
     
         function loadAssets () {
             var self = this;
+            this.$http.get('genre').then(data => {
+                self.genres = data.body.genres
+                self.genre = '<%= bean.getGenre() %>'
+                setTimeout(()=>{
+                    $('.selectpicker').selectpicker('refresh');
+                }, 2000)
+            })
+            this.$http.get('language').then(data => {
+                self.langs = data.body.languages
+                self.lang = '<%= bean.getLanguage() %>'
+            })
             this.movies.forEach((movie, index) => {
                 ///*
                 var key = '14ec215fa352ace6de70d93ff09bcf04';
@@ -166,24 +253,36 @@
             });
         }
         
-        // Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
-        // Vue.http.headers.common['Access-Control-Request-Method'] = '*'
+        function setActive (active, index) {
+            this.active.data = null;
+            this.active = active;
+            this.index = index;
+            this.$http(`api/load?id=${active.id}`)
+                .then(json => active.data = json.body.data)
+        }
         
         var app = new Vue({
             el: '#app',
             data: {
                 movies: data,
+                langs: [],
+                lang: 0,
+                genres: [],
+                genre: 0,
+                actors,
+                actorsAct,
+                directors,
+                directorsAct,
                 active: null,
                 index: -1,
                 advanced: false
             },
             created: loadAssets,
             methods: {
-                setActive (active, index) {
-                    this.active = active;
-                    this.index = index;
-                }
+                setActive
             }
         });
+        
+        setApp(app);
     </script>
 </html>
