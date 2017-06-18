@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 var VueAPP = null;
+var act = 0;
+
 function setApp (app) {
     VueAPP = app;
 }
 $(document).on('click', '.btn-group.bootstrap-select button', function(ev) {
     $(ev.target).parents('.btn-group.bootstrap-select').toggleClass('open');
-    
 })
+
 $(document).on('keyup', '.btn-group.bootstrap-select.update input', function (ev) {
     if (ev.target.value.length <= 3 || ev.keyCode === 8)
         return false;
@@ -18,9 +20,18 @@ $(document).on('keyup', '.btn-group.bootstrap-select.update input', function (ev
     $parent.find('.no-results').text('Carregando...');
     let $select = $parent.find('.selectpicker');
     let route = $select.data('update')
-    VueAPP.$http.get(`${route}?name=${encodeURI(ev.target.value)}`)
-        .then(data => update(data, route, $parent))
+    act = Date.now()/1000
+    analyze(ev, route, $parent, act)
 })
+
+function analyze (ev, route, $parent, timestamp) {
+    window.setTimeout(function() {
+        if (act != timestamp)
+            return false;
+        VueAPP.$http.get(`${route}?name=${encodeURI(ev.target.value)}`)
+            .then(data => update(data, route, $parent))
+    }, 2000)
+}
 
 function update(data, route, $parent) {
     let $select = $parent.find('.selectpicker');

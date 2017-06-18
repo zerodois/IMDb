@@ -13,12 +13,39 @@ import java.util.regex.Pattern;
  */
 public class Actor extends Json {
     private String name, sex;
-    private int id;
+    private int id, credit;
     private Json json;
+    private String character;
     
     public Actor () {
         json = new Json();
     }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+    public Json getJson() {
+        return json;
+    }
+
+    public void setJson(Json json) {
+        this.json = json;
+    }
+
+    public String getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+    
+    
 
     public String getSex() {
         return sex;
@@ -49,6 +76,8 @@ public class Actor extends Json {
         json.addItem("id", id);
         json.addItem("name", name.replace("\"", "\\\""));
         json.addItem("sex", sex);
+        json.addItem("character", character);
+        json.addItem("credit", credit);
         return json.serialize();
     }
 }

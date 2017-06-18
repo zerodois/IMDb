@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -38,8 +41,8 @@ public class ActorDAO {
     }
     
     public ArrayList<Actor> findByMovie (int id) throws SQLException {
-        String str = "select a.* from actors as a inner join actorsmovies as am on a.id=am.actorid where am.movieid='"+id+"'";
-        return execute(str);
+        String str = "select a.*, am.as_character as character from actors as a inner join actorsmovies as am on a.id=am.actorid where am.movieid='"+id+"'";
+        return execute(str, true);
     }
     
     public ArrayList<Actor> find (String name) throws SQLException {
@@ -47,6 +50,10 @@ public class ActorDAO {
     }
     
     public ArrayList<Actor> execute (String sql) throws SQLException {
+        return execute(sql, false);
+    }
+    
+    public ArrayList<Actor> execute (String sql, boolean hasCharacter) throws SQLException {
         ArrayList<Actor> list = new ArrayList<>();
         Statement query = conn.createStatement();
         ResultSet res = query.executeQuery(sql);
@@ -55,8 +62,27 @@ public class ActorDAO {
             n.setName( res.getString("name") );
             n.setId( res.getInt("id") );
             n.setSex( res.getString("sex") );
+            
+            if (hasCharacter) {
+                String character = res.getString("character");
+                character = character.replace("[", "");
+                character = character.replace("]", "");
+                Pattern p = Pattern.compile("<([0-9]+?)>");
+                Matcher m = p.matcher(character);
+                
+                if (m.find()) {
+                    String match = m.group(1);
+                    character = character.replace(match, "").replace("<>", "");
+                    n.setCharacter( character );
+                    n.setCredit(Integer.parseInt(match));
+                } else {
+                    n.setCharacter(character);
+                    n.setCredit(Integer.MAX_VALUE);
+                }
+            }
             list.add(n);
         }
+        list.sort(Comparator.comparingInt((actor) -> actor.getCredit()));
         return list;
     }
 }

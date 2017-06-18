@@ -10,7 +10,7 @@ package model;
  * @author felipe
  */
 public class Director extends Json {
-    private String name;
+    private String name, addition;
     private int id;
     private final Json json;
     
@@ -26,6 +26,14 @@ public class Director extends Json {
         this.id = id;
     }
 
+    public String getAddition() {
+        return addition;
+    }
+
+    public void setAddition(String addition) {
+        this.addition = addition;
+    }
+
     public String getName() {
         return name;
     }
@@ -38,6 +46,7 @@ public class Director extends Json {
     public String serialize() {
         json.addItem("id", id);
         json.addItem("name", name.replace("\"", "\\\""));
+        json.addItem("addition", addition);
         return json.serialize();
     }
 }

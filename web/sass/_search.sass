@@ -2,6 +2,16 @@
     position: static
     margin-bottom: 30px
 #movie-viewer
+    display: block
+    overflow: auto
+    padding-top: 2.5rem
+    .modal-background
+        position: fixed
+        width: calc(100% - 15px)
+    .modal-content
+        overflow: initial
+        max-height: none
+        margin-bottom: 0
     img
         height: 70vh
         width: auto
@@ -14,6 +24,8 @@
     background-color: transparent
     width: 58%
     margin-left: 10px
+    label
+        font-weight: 500
 header.is-primary
     background-color: $primary
 .empty-search

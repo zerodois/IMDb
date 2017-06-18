@@ -34,8 +34,8 @@ public class DirectorDAO {
         return execute(sql(name));
     }
     public ArrayList<Director> findByMovie (int id) throws SQLException {
-        String str = "select d.* from directors as d inner join directorsmovies as dm on d.id=dm.directorid where dm.movieid='"+id+"'";
-        return execute(str);
+        String str = "select d.*, dm.addition from directors as d inner join directorsmovies as dm on d.id=dm.directorid where dm.movieid='"+id+"'";
+        return execute(str, true);
     }
     public ArrayList<Director> find (String []ids) throws SQLException {
         if (ids == null || ids.length == 0)
@@ -44,6 +44,10 @@ public class DirectorDAO {
     } 
 
     public ArrayList<Director> execute (String sql) throws SQLException {
+        return execute(sql, false);
+    }
+    
+    public ArrayList<Director> execute (String sql, boolean hasAddition) throws SQLException {
         ArrayList<Director> list = new ArrayList<>();
         Statement query = conn.createStatement();
         ResultSet res = query.executeQuery(sql);
@@ -51,6 +55,11 @@ public class DirectorDAO {
             Director n = new Director();
             n.setName( res.getString("name") );
             n.setId( res.getInt("id") );
+            
+            if (hasAddition) {
+                n.setAddition( res.getString("addition") );
+            }
+            
             list.add(n);
         }
         return list;

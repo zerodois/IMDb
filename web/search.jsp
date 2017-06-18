@@ -26,23 +26,72 @@
             <!-- INICIO: MODAL  -->
             <div id="movie-viewer" class="modal" :class="{ 'is-active' : active }" v-if="active">
                 <div class="modal-background"></div>
-                <div class="modal-content">
-                    <section class="box overflow">
-                      <p class="image float-left">
-                        <img :src="active.photo">
-                      </p>
-                      <div class="film-content content float-left">
-                          <h4 class="has-text-centered">{{ active.title }}</h4>
-                          <div v-if="active.data">
-                                <label for="">Linguagens: </label><span v-for="l in active.data.languages">{{ l.name }}; </span><br>
-                                <label for="">Gêneros: </label><span v-for="g in active.data.genres">{{ g.name }}; </span><br>
-                                <div v-if="active.data.directors.length > 1" for=""><label>Principais diretores: </label><span v-for="i in Math.min(5, active.data.directors.length)">{{ active.data.directors[i-1].name }}; </span><br></div>
-                                <div v-if="active.data.directors.length == 1" for=""><label>Diretor: </label><span>{{ active.data.directors[0].name }}; </span></div><br>                              
+                <div class="modal-content content transparent">
+                    <section class="box">
+                        <div class="overflow">
+                          <p class="image float-left">
+                            <img :src="active.photo">
+                          </p>
+                          <div class="film-content content float-left">
+                              <h4 class="medium no-bottom">{{ active.title }}</h4>
+                              <div v-if="active.data">
+                                    <label for="">Linguagens: </label><span v-for="l in active.data.languages">{{ l.name }}; </span><br>
+                                    <label for="">Gêneros: </label><span v-for="g in active.data.genres">{{ g.name }}; </span><br>
+                                    <div v-if="active.data.directors.length > 1" class="ident"><label>Principais diretores: </label><span v-for="i in Math.min(5, active.data.directors.length)">{{ active.data.directors[i-1].name }}; </span></div>
+                                    <div v-if="active.data.directors.length == 1"><label>Diretor: </label><span>{{ active.data.directors[0].name }}; </span></div>
+                                    <div v-if="active.data.actors.length > 1" class="ident"><label>Principais atores: </label><span v-for="i in Math.min(5, active.data.actors.length)">{{ active.data.actors[i-1].name }}; </span><br></div>
+                                    <a @click="advanced = !advanced">{{ advanced ? 'Ocultar' : 'Ver' }} elenco e direção completos</a>
+                              </div>
                           </div>
-                      </div>
+                        </div>
+                        <div v-show="advanced">
+                            <h3 class="medium no-margin no-bottom" style="margin-left: 10px !important">Diretores</h3>
+                            <table class="table is-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Informação adicional</th>
+                                  </tr>
+                                </thead>
+                                <tfoot v-if="active.data.directors.length>5">
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Informação adicional</th>
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                  <tr v-for="director in active.data.directors">
+                                    <td>{{ director.name }}</td>
+                                    <td>{{ director.addition || '--' }}</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 class="medium no-margin no-bottom" style="margin-left: 10px !important">Atores</h3>
+                            <table class="table is-striped no-bottom">
+                                <thead>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Personagem</th>
+                                  </tr>
+                                </thead>
+                                <tfoot>
+                                  <tr>
+                                    <th>Nome</th>
+                                    <th>Personagem</th>
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                  <tr v-for="actor in active.data.actors">
+                                    <td>{{ actor.name }}</td>
+                                    <td>{{ actor.character }}</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </div>
-                <button class="modal-close" @click="setActive(null)"></button>
+                <button class="modal-close" @click="close()"></button>
             </div>
             <!-- FIM: MODAL -->
 
@@ -70,13 +119,6 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Línguagem: </article>
                                 <article class="column is-8">
-                                    <!-- <input type="text" placeholder="Ex.: Português; Russo" class="input flat"> -->
-                                    <!-- <span class="select search is-fullwidth">
-                                        <select>
-                                          <option selected disabled>Select language</option>
-                                          <option v-for="lang in langs" :value="lang.name">{{ lang.name }}</option>
-                                        </select>
-                                    </span> -->
                                     <select v-model="lang" name="language" title="Nenhuma linguagem selecionada" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
                                         <option v-for="lang in langs" :value="lang.name">{{ lang.name }}</option>
                                     </select>
@@ -172,8 +214,10 @@
                                 <% int pages = (int) Math.ceil(r/rp); %>
                                 <%
                                     String link = "title=" + bean.getTitle();
-                                    link += "&year=" + bean.getYear();
-                                    link += "&category=" + bean.getCategory();
+                                    if (bean.getYear() != null)
+                                        link += "&year=" + bean.getYear();
+                                    if (bean.getCategory() != null)                                    
+                                        link += "&category=" + bean.getCategory();
                                     String[] d = bean.getDirectors();
                                     String[] a = bean.getActors();
                                     if (d != null)
@@ -275,6 +319,12 @@
                 });
         }
         
+        function close() {
+            this.index = null
+            this.active = null
+            this.advanced = false
+        }
+        
         var app = new Vue({
             el: '#app',
             data: {
@@ -282,7 +332,7 @@
                 langs: [],
                 lang: 0,
                 genres: [],
-                genre: 0,
+                genre: '<%= bean.getGenre() %>',
                 actors,
                 actorsAct,
                 directors,
@@ -293,7 +343,8 @@
             },
             created: loadAssets,
             methods: {
-                setActive
+                setActive,
+                close
             }
         });
         

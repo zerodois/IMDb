@@ -4328,6 +4328,16 @@ body, html {
 .overflow {
   overflow: hidden; }
 
+.medium {
+  font-weight: 500 !important; }
+
+.ident {
+  padding-left: 15px;
+  text-indent: -15px; }
+
+.transparent {
+  background-color: transparent !important; }
+
 .relative {
   position: relative !important; }
 
@@ -4349,6 +4359,9 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
 
 .no-padding-top {
   padding-top: 0 !important; }
+
+.no-bottom {
+  margin-bottom: 2px !important; }
 
 .no-margin {
   margin-top: 0 !important;
@@ -4414,10 +4427,21 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
   position: static;
   margin-bottom: 30px; }
 
-#movie-viewer img {
-  height: 70vh;
-  width: auto;
-  border-radius: 5px; }
+#movie-viewer {
+  display: block;
+  overflow: auto;
+  padding-top: 2.5rem; }
+  #movie-viewer .modal-background {
+    position: fixed;
+    width: calc(100% - 15px); }
+  #movie-viewer .modal-content {
+    overflow: initial;
+    max-height: none;
+    margin-bottom: 0; }
+  #movie-viewer img {
+    height: 70vh;
+    width: auto;
+    border-radius: 5px; }
 
 .modal-content {
   width: 60%; }
@@ -4428,6 +4452,8 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
   background-color: transparent;
   width: 58%;
   margin-left: 10px; }
+  .film-content label {
+    font-weight: 500; }
 
 header.is-primary {
   background-color: #00d1b2; }
