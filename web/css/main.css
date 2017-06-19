@@ -4321,6 +4321,15 @@ label.panel-block {
 body, html {
   /* overflow: auto */ }
 
+.magic {
+  border: 0;
+  outline: none;
+  text-align: center;
+  font-size: 1rem;
+  color: #333; }
+  .magic:focus, .magic:active {
+    border-bottom: thin solid #dbdbdb; }
+
 .is-fullheight {
   height: 100% !important; }
 

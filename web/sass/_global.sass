@@ -1,5 +1,13 @@
 body, html
     /* overflow: auto */
+.magic
+    border: 0
+    outline: none
+    text-align: center
+    font-size: 1rem
+    color: #333
+    &:focus, &:active
+        border-bottom: thin solid $border
 .has-shadow
     @extend .nav.has-shadow
 .is-fullheight
