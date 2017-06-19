@@ -6,21 +6,22 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="is-fullheight">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>IMDb</title>
         <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
         <tag:include />
     </head>
-    <body>
+    <body class="is-fullheight">
         <section class="landing">
             <header class="header">
                 <section class="left">
                     <i class="icon-logo"></i>
                 </section>
                 <section class="right">
-                    <a class="white" href="#">Estatísticas</a>
+                    <a class="white" style="margin-right: 20px" href="search?title=">Busca avançada</a>
+                    <a class="white" href="stats">Estatísticas</a>
                 </section>
             </header>
             <div class="content">

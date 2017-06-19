@@ -61,7 +61,10 @@ public class Search extends HttpServlet {
             
             ActorDAO actorAPI = new ActorDAO();
             ArrayList<model.Actor> actors = actorAPI.find(bean.getActors());
+    
+            boolean empty = bean.isEmpty();
             
+            request.setAttribute("empty", empty);
             request.setAttribute("results_per_page", results_per_page);
             request.setAttribute("movies", m.search(bean));
             request.setAttribute("directors", directors);

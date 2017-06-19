@@ -22,7 +22,7 @@ import persistence.LanguageDAO;
  *
  * @author felipe
  */
-@WebServlet(name = "Language", urlPatterns = {"/language"})
+@WebServlet(name = "Language", urlPatterns = {"/api/language"})
 public class Language extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

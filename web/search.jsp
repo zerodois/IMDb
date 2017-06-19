@@ -172,7 +172,7 @@
                     </section>
                 </form>
                 <section class="right">
-                    <a href="#" class="white">Estatísticas</a>
+                    <a href="stats" class="white">Estatísticas</a>
                 </section>
             </header>
             <section class="container blurrable">
@@ -183,7 +183,8 @@
                     </div>
                     <% } else { %>
                     <div class="column is-12 has-text-centered">
-                        <figure class="image empty-search"><img src="img/ue.svg" alt=""></figure>
+                        <% boolean empty = Boolean.parseBoolean(request.getAttribute("empty").toString()); %>
+                        <figure class="image empty-search"><img src="img/<%= !empty ? "ue" : "empty" %>.svg" alt=""></figure>
                     </div>
                     <% } %>
                 </article>
@@ -280,14 +281,14 @@
     
         function loadAssets () {
             var self = this;
-            this.$http.get('genre').then(data => {
+            this.$http.get('api/genre').then(data => {
                 self.genres = data.body.genres
                 self.genre = '<%= bean.getGenre() %>'
                 setTimeout(()=>{
                     $('.selectpicker').selectpicker('refresh');
                 }, 2000)
             })
-            this.$http.get('language').then(data => {
+            this.$http.get('api/language').then(data => {
                 self.langs = data.body.languages
                 self.lang = '<%= bean.getLanguage() %>'
             })

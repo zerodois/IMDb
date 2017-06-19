@@ -22,7 +22,7 @@ import persistence.DirectorDAO;
  *
  * @author felipe
  */
-@WebServlet(name = "Director", urlPatterns = {"/director"})
+@WebServlet(name = "Director", urlPatterns = {"/api/director"})
 public class Director extends HttpServlet {
 
     /**

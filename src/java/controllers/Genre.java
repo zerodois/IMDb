@@ -22,7 +22,7 @@ import persistence.GenreDAO;
  *
  * @author felipe
  */
-@WebServlet(name = "Genre", urlPatterns = {"/genre"})
+@WebServlet(name = "Genre", urlPatterns = {"/api/genre"})
 public class Genre extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

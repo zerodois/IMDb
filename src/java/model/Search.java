@@ -14,6 +14,22 @@ public class Search {
     private String directors[], actors[];
     private int results_per_page, page;
 
+    private boolean empty (String field) {
+        return field == null || field == "";
+    }
+    private boolean empty (String []field) {
+        return field == null || field.length == 0;
+    }
+    
+    public boolean isEmpty () {
+        return empty(title)
+                && empty(year)
+                && empty(genre)
+                && empty(language)
+                && empty(directors)
+                && empty(actors);
+    }
+    
     public String getLanguage() {
         return language;
     }

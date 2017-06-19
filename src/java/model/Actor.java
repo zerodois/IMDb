@@ -45,8 +45,6 @@ public class Actor extends Json {
         this.character = character;
     }
     
-    
-
     public String getSex() {
         return sex;
     }

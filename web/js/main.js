@@ -28,7 +28,7 @@ function analyze (ev, route, $parent, timestamp) {
     window.setTimeout(function() {
         if (act != timestamp)
             return false;
-        VueAPP.$http.get(`${route}?name=${encodeURI(ev.target.value)}`)
+        VueAPP.$http.get(`api/${route}?name=${encodeURI(ev.target.value)}`)
             .then(data => update(data, route, $parent))
     }, 2000)
 }
@@ -39,8 +39,8 @@ function update(data, route, $parent) {
     $select.find("option:selected").each(function(i, item){
         arr.push({ name: item.text, id: item.value })
     })
-    console.log(arr)
     VueAPP[`${route}s`] = arr.concat(data.body[`${route}s`])
+    console.log(data.body[`${route}s`])
     setTimeout(function(){
         $parent.find('.no-results').text('Nenhum resultado encontrado');
         $select.selectpicker('refresh');

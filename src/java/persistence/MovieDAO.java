@@ -9,7 +9,6 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Data;
 import model.Movie;
 import model.Search;
 /**
@@ -42,6 +41,12 @@ public class MovieDAO {
     }
         
     public List<Movie> search(Search search) throws SQLException {
+
+        List<Movie> list = new ArrayList<>();
+        total = 0;
+        if (search.isEmpty())
+            return list;
+        
         int page = search.getPage();
         int res = search.getResults_per_page();
         String title = empty(search.getTitle());
@@ -59,8 +64,7 @@ public class MovieDAO {
         Logger.getLogger(controllers.Search.class.getName()).log(Level.SEVERE, sql);
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(sql);
-        List<Movie> list = new ArrayList<>();
-        total = 0;
+        
         while (result.next()) {
             if (total == 0)
                 total = result.getInt("total");
