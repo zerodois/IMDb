@@ -121,7 +121,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Ano de lançamento: </article>
                                 <article class="column is-8">
-                                    <input name="year" value="<%= bean.getYear() %>" type="number" placeholder="Ex.: 2004" class="input flat">
+                                    <input name="year" v-model="year" @blur="year = Math.min(2017, Math.max(1800, year))" value="<%= bean.getYear() %>" type="number" placeholder="Ex.: 2004" class="input flat">
                                 </article>
                             </section>
                             <section class="columns no-margin">
@@ -275,7 +275,7 @@
         <% ArrayList<Movie> m = (ArrayList<Movie>)request.getAttribute("movies"); %>
         var data = [];
         <% for (Movie item : m) { %>
-            data.push({ id: <%= item.getId() %>, title: `<%= item.getTitle().replaceAll("\\([0-9]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
+            data.push({ id: <%= item.getId() %>, title: `<%= item.getTitle().replaceAll("\\([0-9|?]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
         <% } %>
 
         <% ArrayList<Director> d = (ArrayList<Director>)request.getAttribute("directors"); %>
@@ -356,6 +356,7 @@
                 langs: [],
                 lang: 0,
                 genres: [],
+                year: '',
                 genre: '<%= bean.getGenre() %>',
                 category: '<%= bean.getCategory() %>',
                 actors,
