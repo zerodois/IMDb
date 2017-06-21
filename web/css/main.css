@@ -4601,6 +4601,18 @@ header {
 #internal-error img {
   height: 70vh; }
 
+.s-1 .dropdown-menu.open {
+  z-index: 19 !important; }
+
+.s-2 .dropdown-menu.open {
+  z-index: 18 !important; }
+
+.s-3 .dropdown-menu.open {
+  z-index: 17 !important; }
+
+.s-4 .dropdown-menu.open {
+  z-index: 16 !important; }
+
 .btn-group.bootstrap-select {
   height: auto;
   position: relative; }

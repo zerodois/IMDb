@@ -127,7 +127,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Línguagem: </article>
                                 <article class="column is-8">
-                                    <select v-model="lang" name="language" title="Nenhuma linguagem selecionada" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
+                                    <select data-style="s-1" v-model="lang" name="language" title="Nenhuma linguagem selecionada" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
                                         <option value=""  <%= bean.getLanguage() == null || bean.getLanguage() == "" ? "selected" : "" %>>All languages</option>
                                         <% if (bean.getLanguage() != null) { %>
                                             <option value="<%= bean.getLanguage()%>" selected=""><%= bean.getLanguage()%></option>
@@ -139,7 +139,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Gênero: </article>
                                 <article class="column is-8">
-                                    <select v-model="genre" name="genre" title="Nenhum gênero selecionado" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
+                                    <select data-style="s-2" v-model="genre" name="genre" title="Nenhum gênero selecionado" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
                                         <option value=""  <%= bean.getGenre() == null || bean.getGenre() == "" ? "selected" : "" %>>All genres</option>
                                         <% if (bean.getGenre() != null) { %>
                                             <option value="<%= bean.getGenre() %>" selected=""><%= bean.getGenre() %></option>
@@ -165,7 +165,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Atores envolvidos: </article>
                                 <article class="column is-8">
-                                    <select v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
+                                    <select data-style="s-3" v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
                                         <option v-for="actor in actors" :value="actor.id">{{ actor.name }}</option>
                                     </select>
                                 </article>
@@ -173,7 +173,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Diretores participantes: </article>
                                 <article class="column is-8">
-                                    <select v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
+                                    <select data-style="s-4" v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
                                         <option v-for="director in directors" :value="director.id">{{ director.name }}</option>
                                     </select>
                                 </article>

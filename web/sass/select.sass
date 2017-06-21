@@ -1,4 +1,8 @@
 $button-size: 2.25rem
+$x: 4
+@for $i from 1 through $x
+  .s-#{$i} .dropdown-menu.open
+    z-index: (15 + $x + 1 ) - $i !important
 .btn-group.bootstrap-select
     @extend .select
     @extend .is-fullwidth
@@ -7,7 +11,7 @@ $button-size: 2.25rem
     position: relative
     &.open
         .dropdown-menu.open
-            display: block       
+            display: block
     .dropdown-menu.open
         top: calc( #{$button-size} + 2px )
         left: 0
