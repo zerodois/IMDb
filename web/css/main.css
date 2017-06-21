@@ -4319,7 +4319,14 @@ label.panel-block {
   padding: 3rem 1.5rem 6rem; }
 
 body, html {
-  /* overflow: auto */ }
+  overflow: initial; }
+
+body.app, html.app {
+  height: 100%; }
+
+.hidden-scroll {
+  height: 100%;
+  overflow: hidden; }
 
 .magic {
   border: 0;
@@ -4389,7 +4396,8 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
   -moz-filter: blur(10px);
   -o-filter: blur(10px);
   -ms-filter: blur(10px);
-  filter: blur(10px); }
+  filter: blur(10px);
+  overflow: hidden; }
 
 .landing {
   height: 100%;
@@ -4440,7 +4448,7 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
 
 #movie-viewer {
   display: block;
-  overflow: auto;
+  overflow-y: scroll;
   padding-top: 2.5rem; }
   #movie-viewer .modal-background {
     position: fixed;

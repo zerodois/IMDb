@@ -12,17 +12,17 @@
 <%@page import="model.Movie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="app">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Typeinitial" content="text/html; charset=UTF-8">
         <% Search bean = (Search)request.getAttribute("search"); %>
         <% String busca = bean.getTitle() != null ? bean.getTitle() : ""; %>
         <title>IMDb | <%= busca %></title>
         <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
         <tag:include />
     </head>
-    <body class="relative">
-        <div id="app">
+    <body class="relative app">
+        <div id="app" :class="{ 'hidden-scroll' : active }">
             <!-- INICIO: MODAL  -->
             <div id="movie-viewer" class="modal" :class="{ 'is-active' : active }" v-if="active">
                 <div class="modal-background"></div>
@@ -40,6 +40,7 @@
                                     <div v-if="active.data.directors.length > 1" class="ident"><label>Principais diretores: </label><span v-for="i in Math.min(5, active.data.directors.length)">{{ active.data.directors[i-1].name }}; </span></div>
                                     <div v-if="active.data.directors.length == 1"><label>Diretor: </label><span>{{ active.data.directors[0].name }}; </span></div>
                                     <div v-if="active.data.actors.length > 1" class="ident"><label>Principais atores: </label><span v-for="i in Math.min(5, active.data.actors.length)">{{ active.data.actors[i-1].name }}; </span><br></div>
+                                    <div v-if="active.data.actors.length == 1" class="ident"><label>Principal ator: </label><span>{{ active.data.actors[0].name }}; </span><br></div>
                                     <a @click="advanced = !advanced">{{ advanced ? 'Ocultar' : 'Ver' }} elenco e direção completos</a>
                               </div>
                           </div>
@@ -53,7 +54,7 @@
                                     <th>Informação adicional</th>
                                   </tr>
                                 </thead>
-                                <tfoot v-if="active.data.directors.length>5">
+                                <tfoot v-if="active.data.directors.length > 10">
                                   <tr>
                                     <th>Nome</th>
                                     <th>Informação adicional</th>
@@ -75,7 +76,7 @@
                                     <th>Personagem</th>
                                   </tr>
                                 </thead>
-                                <tfoot>
+                                <tfoot v-if="active.data.directors.length > 50">
                                   <tr>
                                     <th>Nome</th>
                                     <th>Personagem</th>
