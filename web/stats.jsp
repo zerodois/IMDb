@@ -28,7 +28,8 @@
                 <div class="columns content transparent">
                     <article class="column is-12">
                         <div style="width: 900px; margin: auto;">
-                            Abaixo encontra-se um gráfico contendo um ranking com os 100 pares atores/diretores que mais trabalharam em conjunto, seguido da tabela contendo todos os pares que trabalharam juntos mais que <a title="Clique para atualizar" v-show="!show" @click="focus">{{ X }}</a><input :ref="'input-X'" v-show="show" @blur="atualize" class="magic" v-model="X" type="number" min="0" size="4" max="9999"> vezes :)
+                            Abaixo encontra-se um gráfico contendo um ranking com os 100 pares atores/diretores que mais trabalharam em conjunto, 
+                            seguido da tabela contendo todos os pares que trabalharam juntos mais que <a title="Clique para atualizar" v-show="!show" @click="focus">{{ X }}</a><input :ref="'input-X'" v-show="show" @keypress="enter" @blur="atualize" class="magic" v-model="X" type="number" min="0" size="4" max="9999"> vezes :)
                         </div>
                         <div id="graph" style="width: 1000px; height:500px;"></div>
                     </article>
@@ -38,20 +39,23 @@
                         <table class="table is-striped no-bottom">
                             <thead>
                               <tr>
+                                <th class="has-text-centered">Classificação</th>
                                 <th>Nome do ator</th>
                                 <th>Nome do diretor</th>
                                 <th>Trabalhos realizados em dupla</th>
                               </tr>
                             </thead>
-                            <tfoot>
+                            <tfoot v-if="ranking.length > 30">
                               <tr>
+                                <th class="has-text-centered">Classificação</th>
                                 <th>Nome do ator</th>
                                 <th>Nome do diretor</th>
                                 <th>Trabalhos realizados em dupla</th>
                               </tr>
                             </tfoot>
                             <tbody>
-                              <tr v-for="item in ranking">
+                              <tr v-for="(item, i) in ranking">
+                                <td class="has-text-centered">{{ i + 1 }}º</td>
                                 <td>{{ item.actor.name }}</td>
                                 <td>{{ item.director.name }}</td>
                                 <td>{{ item.amount }}</td>
@@ -73,7 +77,7 @@
     <script>
         var ant = -1;
         
-        function atualize (event) {
+        function atualize () {
             this.show = false;
             if (this.X === '')
                 this.X = this.ant;
@@ -93,11 +97,17 @@
             this.ant = this.X
         }
         
+        function enter (event) {
+            if (event.keyCode === 13)
+                this.atualize();
+        } 
+        
         var app = new Vue({
             el: '#app',
             methods: {
                 atualize,
-                focus
+                focus,
+                enter
             },
             created () {
                 let self = this
