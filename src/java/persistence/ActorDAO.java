@@ -19,8 +19,7 @@ import java.util.regex.Pattern;
  *
  * @author felipe
  */
-public class ActorDAO {
-    private final Connection conn;
+public class ActorDAO extends DAO {
     public ActorDAO() throws DAOException {
         this.conn = ConnectionFactory.getConnection();
     }
@@ -83,6 +82,9 @@ public class ActorDAO {
             list.add(n);
         }
         list.sort(Comparator.comparingInt((actor) -> actor.getCredit()));
+        
+        res.close();
+        query.close();
         return list;
     }
 }

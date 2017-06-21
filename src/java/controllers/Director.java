@@ -60,6 +60,8 @@ public class Director extends HttpServlet {
             Json json = new Json();
             json.addArray("directors", new ArrayList<>(dirs));
             out.print(json.serialize());
+            
+            dao.close();
         } catch (DAOException | SQLException ex) {
             out.print("{ \"error\": \"" + ex.getMessage() + "\" }");
         }

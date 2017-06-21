@@ -16,8 +16,7 @@ import model.Director;
  *
  * @author felipe
  */
-public class DirectorDAO {
-    private final Connection conn;
+public class DirectorDAO extends DAO {
     public DirectorDAO() throws DAOException {
         this.conn = ConnectionFactory.getConnection();
     }
@@ -62,6 +61,9 @@ public class DirectorDAO {
             
             list.add(n);
         }
+        
+        res.close();
+        query.close();
         return list;
     }
 

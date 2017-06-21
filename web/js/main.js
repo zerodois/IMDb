@@ -14,8 +14,8 @@ $(document).on('click', '.btn-group.bootstrap-select button', function(ev) {
 })
 
 $(document).on('keyup', '.btn-group.bootstrap-select.update input', function (ev) {
-    if (ev.target.value.length <= 3 || ev.keyCode === 8)
-        return false;
+    if (ev.target.value.length < 3 || ev.keyCode === 8)
+        return false
     let $parent = $(ev.target).parents('.bootstrap-select');
     $parent.find('.no-results').text('Carregando...');
     let $select = $parent.find('.selectpicker');
@@ -26,7 +26,7 @@ $(document).on('keyup', '.btn-group.bootstrap-select.update input', function (ev
 
 function analyze (ev, route, $parent, timestamp) {
     window.setTimeout(function() {
-        if (act != timestamp)
+        if (act != timestamp || ev.target.value.length < 3)
             return false;
         VueAPP.$http.get(`api/${route}?name=${encodeURI(ev.target.value)}`)
             .then(data => update(data, route, $parent))

@@ -46,6 +46,8 @@ public class Language extends HttpServlet {
             Json json = new Json();
             json.addArray("languages", new ArrayList<>(lang));
             out.print(json.serialize());
+            
+            dao.close();
         } catch (DAOException | SQLException ex) {
             out.print("{ \"error\": \"" + ex.getMessage() + "\" }");
         }

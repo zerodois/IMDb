@@ -15,8 +15,7 @@ import model.Search;
  *
  * @author felipe
  */
-public class MovieDAO {
-    private final Connection conn;
+public class MovieDAO extends DAO {
     private final int results_per_page = 16;
     private int total;
     public MovieDAO() throws DAOException{
@@ -74,6 +73,9 @@ public class MovieDAO {
             m.setTitle(result.getString("title_movie"));
             list.add(m);
         }
+        
+        result.close();
+        stmt.close();
         return list;
     }
 }

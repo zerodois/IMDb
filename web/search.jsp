@@ -165,7 +165,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Atores envolvidos: </article>
                                 <article class="column is-8">
-                                    <select data-style="s-3" v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
+                                    <select v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update s-3" class="selectpicker" multiple data-live-search="true">
                                         <option v-for="actor in actors" :value="actor.id">{{ actor.name }}</option>
                                     </select>
                                 </article>
@@ -173,7 +173,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Diretores participantes: </article>
                                 <article class="column is-8">
-                                    <select data-style="s-4" v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update" class="selectpicker" multiple data-live-search="true">
+                                    <select v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update s-4" class="selectpicker" multiple data-live-search="true">
                                         <option v-for="director in directors" :value="director.id">{{ director.name }}</option>
                                     </select>
                                 </article>
@@ -249,7 +249,7 @@
                                             link += "&actors=" + s;
                                 %>
                                 <% int current = (Integer)request.getAttribute("page"); %>
-                                <% if (current >= 4) { %>
+                                <% if (current >= 3) { %>
                                     <li><a class="pagination-link" href="search?<%= link %>&page=0">1</a></li>
                                     ...
                                 <% } %>

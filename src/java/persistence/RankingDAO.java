@@ -5,7 +5,6 @@
  */
 package persistence;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,9 +17,8 @@ import model.Ranking;
  *
  * @author felipe
  */
-public class RankingDAO {
+public class RankingDAO extends DAO{
     
-    private final Connection conn;
     public RankingDAO () throws DAOException {
         this.conn = ConnectionFactory.getConnection();
     }
@@ -50,6 +48,8 @@ public class RankingDAO {
             arr.add(r);
         }
         
+        res.close();
+        stmt.close();
         return arr;
     }
     //SELECT * FROM get_ranking(1000, 100, 0); X, LIM, OFS

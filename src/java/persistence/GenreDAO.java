@@ -16,8 +16,7 @@ import model.Genre;
  *
  * @author felipe
  */
-public class GenreDAO {
-    private final Connection conn;
+public class GenreDAO extends DAO {
     private final String sql;
     public GenreDAO() throws DAOException {
         this.conn = ConnectionFactory.getConnection();
@@ -33,6 +32,8 @@ public class GenreDAO {
             n.setName(name);
             list.add(n);
         }
+        res.close();
+        query.close();
         return list;
     }
     public ArrayList<Genre> findByMovie (int id) throws SQLException {
@@ -45,6 +46,9 @@ public class GenreDAO {
             g.setName(resp.getString("name"));
             arr.add(g);
         }
+        
+        resp.close();
+        q.close();
         return arr;
     }
 }

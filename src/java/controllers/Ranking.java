@@ -50,6 +50,8 @@ public class Ranking extends HttpServlet {
             Json resp = new Json();
             resp.addArray("rankings", new ArrayList<>(arr));
             out.print(resp.serialize());
+            
+            dao.close();
         } catch (DAOException | SQLException ex) {
             out.print("{ \"error\": \"" + ex.getMessage() + "\" }");
         }

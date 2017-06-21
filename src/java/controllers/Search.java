@@ -45,7 +45,6 @@ public class Search extends HttpServlet {
         try {
             if (request.getParameter("page") != null)
                 page = Integer.parseInt(request.getParameter("page"));
-            MovieDAO m = new MovieDAO();
             bean.setTitle(title);
             bean.setGenre(request.getParameter("genre"));
             bean.setLanguage(request.getParameter("language"));
@@ -56,6 +55,7 @@ public class Search extends HttpServlet {
             bean.setResults_per_page(results_per_page);
             bean.setPage(page);
             
+            MovieDAO m = new MovieDAO();
             DirectorDAO directorAPI = new DirectorDAO();
             ArrayList<model.Director> directors = directorAPI.find(bean.getDirectors());
             
@@ -72,6 +72,10 @@ public class Search extends HttpServlet {
             request.setAttribute("term", title);
             request.setAttribute("total", m.getTotalFound());
             request.setAttribute("page", page);
+            
+            directorAPI.close();
+            actorAPI.close();
+            m.close();
         } catch (SQLException | DAOException ex) {
             response.sendRedirect("./error.jsp");
             Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);

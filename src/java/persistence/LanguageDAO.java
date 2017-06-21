@@ -16,8 +16,7 @@ import model.Language;
  *
  * @author felipe
  */
-public class LanguageDAO {
-    private final Connection conn;
+public class LanguageDAO extends DAO {
     private final String sql;
     public LanguageDAO() throws DAOException {
         this.conn = ConnectionFactory.getConnection();
@@ -33,6 +32,8 @@ public class LanguageDAO {
             n.setName(name);
             list.add(n);
         }
+        res.close();
+        query.close();
         return list;
     }
     
@@ -46,6 +47,9 @@ public class LanguageDAO {
             g.setName(resp.getString("name"));
             arr.add(g);
         }
+        
+        resp.close();
+        q.close();
         return arr;
     }
 }

@@ -46,6 +46,8 @@ public class Genre extends HttpServlet {
             Json json = new Json();
             json.addArray("genres", new ArrayList<>(genr));
             out.print(json.serialize());
+            
+            dao.close();
         } catch (DAOException | SQLException ex) {
             out.print("{ \"error\": \"" + ex.getMessage() + "\" }");
         }

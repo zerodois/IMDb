@@ -64,6 +64,12 @@ public class Movie extends HttpServlet {
             Json json = new Json();
             json.addItem("data", data);
             out.print(json.serialize());
+            
+            gDao.close();
+            lDao.close();
+            aDao.close();
+            dDao.close();
+
         } catch (DAOException | SQLException ex) {
             out.print("{ \"error\": \"" + ex.getMessage() + "\" }");
         }

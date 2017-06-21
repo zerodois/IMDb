@@ -51,6 +51,8 @@ public class Actor extends HttpServlet {
             Json json = new Json();
             json.addArray("actors", new ArrayList<>(acts));
             out.print(json.serialize());
+
+            dao.close();
         } catch (DAOException | SQLException ex) {
             out.print("{ \"error\": \"" + ex.getMessage() + "\" }");
         }
