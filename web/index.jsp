@@ -36,7 +36,7 @@
                            </div>                     
                         </div>
                         <div class="column is-2">
-                            <button class="button is-outlined ghost">Search</button>
+                            <button class="button is-outlined ghost">Buscar</button>
                         </div>
                     </div>
                 </form>

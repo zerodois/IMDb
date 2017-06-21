@@ -16,7 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <% Search bean = (Search)request.getAttribute("search"); %>
-        <% String busca = bean.getTitle(); %>
+        <% String busca = bean.getTitle() != null ? bean.getTitle() : ""; %>
         <title>IMDb | <%= busca %></title>
         <%@ taglib tagdir="/WEB-INF/tags" prefix="tag"%>
         <tag:include />
@@ -120,6 +120,10 @@
                                 <article class="column is-4">Línguagem: </article>
                                 <article class="column is-8">
                                     <select v-model="lang" name="language" title="Nenhuma linguagem selecionada" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
+                                        <option value=""  <%= bean.getLanguage() == null || bean.getLanguage() == "" ? "selected" : "" %>>All languages</option>
+                                        <% if (bean.getLanguage() != null) { %>
+                                            <option value="<%= bean.getLanguage()%>" selected=""><%= bean.getLanguage()%></option>
+                                        <% } %>
                                         <option v-for="lang in langs" :value="lang.name">{{ lang.name }}</option>
                                     </select>
                                 </article>
@@ -128,6 +132,10 @@
                                 <article class="column is-4">Gênero: </article>
                                 <article class="column is-8">
                                     <select v-model="genre" name="genre" title="Nenhum gênero selecionado" data-none-results-text="Nenhum resultado encontrado" class="selectpicker" data-live-search="true">
+                                        <option value=""  <%= bean.getGenre() == null || bean.getGenre() == "" ? "selected" : "" %>>All genres</option>
+                                        <% if (bean.getGenre() != null) { %>
+                                            <option value="<%= bean.getGenre() %>" selected=""><%= bean.getGenre() %></option>
+                                        <% } %>
                                         <option v-for="genre in genres" :value="genre.name">{{ genre.name }}</option>
                                     </select>
                                 </article>
@@ -136,12 +144,12 @@
                                 <article class="column is-4">Categoria: </article>
                                 <article class="column is-8">
                                     <span class="select search is-fullwidth">
-                                        <select name="category">
-                                          <option value="M" <%= bean.getCategory() == "M" || bean.getCategory() == "" || bean.getCategory() == null ? "" : "" %>>Movie</option>
-                                          <option value="T" <%= bean.getCategory() == "T" ? "" : "" %>>TV Show</option>
-                                          <option value="E" <%= bean.getCategory() == "E" ? "" : "" %>>Episode</option>
-                                          <option value="V" <%= bean.getCategory() == "V" ? "" : "" %>>Video</option>
-                                          <option value="G" <%= bean.getCategory() == "G" ? "" : "" %>>Game</option>
+                                        <select name="category" v-model="category">
+                                          <option value="M">Movie</option>
+                                          <option value="T">TV Show</option>
+                                          <option value="E">Episode</option>
+                                          <option value="V">Video</option>
+                                          <option value="G">Game</option>
                                         </select>
                                     </span>
                                 </article>
@@ -217,6 +225,10 @@
                                     String link = "title=" + bean.getTitle();
                                     if (bean.getYear() != null)
                                         link += "&year=" + bean.getYear();
+                                    if (bean.getGenre()!= null)
+                                        link += "&genre=" + bean.getGenre();
+                                    if (bean.getLanguage()!= null)
+                                        link += "&language=" + bean.getLanguage();
                                     if (bean.getCategory() != null)                                    
                                         link += "&category=" + bean.getCategory();
                                     String[] d = bean.getDirectors();
@@ -282,15 +294,17 @@
         function loadAssets () {
             var self = this;
             this.$http.get('api/genre').then(data => {
-                self.genres = data.body.genres
-                self.genre = '<%= bean.getGenre() %>'
+                self.genre = '<%= bean.getGenre() != null ? bean.getGenre() : "" %>'
+                self.genres = data.body.genres.filter(item => item.name != self.genre)
+                if (self.category == 'null')
+                    self.category = 'M'
                 setTimeout(()=>{
                     $('.selectpicker').selectpicker('refresh');
-                }, 2000)
+                }, 500)
             })
             this.$http.get('api/language').then(data => {
-                self.langs = data.body.languages
-                self.lang = '<%= bean.getLanguage() %>'
+                self.lang = '<%= bean.getLanguage() != null ? bean.getLanguage() : "" %>'
+                self.langs = data.body.languages.filter(item => item.name != self.lang)
             })
             this.movies.forEach((movie, index) => {
                 ///*
@@ -334,6 +348,7 @@
                 lang: 0,
                 genres: [],
                 genre: '<%= bean.getGenre() %>',
+                category: '<%= bean.getCategory() %>',
                 actors,
                 actorsAct,
                 directors,
