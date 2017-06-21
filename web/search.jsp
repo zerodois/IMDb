@@ -26,6 +26,13 @@
             <!-- INICIO: MODAL  -->
             <div id="movie-viewer" class="modal" :class="{ 'is-active' : active }" v-if="active">
                 <div class="modal-background"></div>
+                <span class="nav-button right" v-show="index < movies.length - 1">
+                    <i class="fa fa-chevron-right fa-2x fa-fw pointer" @click="setActive(movies[index + 1], index + 1)" aria-hidden="true"></i>
+                </span>
+                <span class="nav-button left" v-show="index > 0">
+                    <i class="fa fa-chevron-left fa-2x fa-fw pointer" @click="setActive(movies[index - 1], index - 1)" aria-hidden="true"></i>
+                </span>
+
                 <div class="modal-content content transparent">
                     <section class="box">
                         <div class="overflow">
@@ -323,6 +330,7 @@
             //if (this.active)
                 //this.active.data = null;
             var self = this;
+            this.advanced = false
             this.index = index;
             if (!active) {
                 this.active = active;

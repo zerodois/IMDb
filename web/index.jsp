@@ -20,7 +20,7 @@
                     <i class="icon-logo"></i>
                 </section>
                 <section class="right">
-                    <a class="white" style="margin-right: 20px" href="search?title=">Busca avançada</a>
+                    <a class="white" style="margin-right: 20px" href="search">Busca avançada</a>
                     <a class="white" href="stats">Estatísticas</a>
                 </section>
             </header>

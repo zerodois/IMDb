@@ -4450,6 +4450,14 @@ input.flat, .header .search-area input.bootstrap-select, .header .search-area in
   display: block;
   overflow-y: scroll;
   padding-top: 2.5rem; }
+  #movie-viewer .nav-button {
+    color: white;
+    position: fixed;
+    top: 50%; }
+    #movie-viewer .nav-button.left {
+      left: 50px; }
+    #movie-viewer .nav-button.right {
+      right: 50px; }
   #movie-viewer .modal-background {
     position: fixed;
     width: calc(100% - 15px); }
