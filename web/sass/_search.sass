@@ -2,7 +2,6 @@
     position: static
     margin-bottom: 30px
 #movie-viewer
-    
     .nav-button
         color: white
         position: fixed
@@ -31,6 +30,15 @@
     .image
         max-width: 40%
     width: 60%
+
+/* Ajuste responsivo */
+@media screen and (max-width: 1024px)
+    .modal-content
+        width: 80%
+    #movie-viewer
+        img
+            height: 60vh
+
 .film-content
     background-color: transparent
     width: 58%

@@ -45,7 +45,7 @@ public class Director extends Json {
     @Override
     public String serialize() {
         json.addItem("id", id);
-        json.addItem("name", name.replace("\"", "\\\""));
+        json.addItem("name", name);
         json.addItem("addition", addition);
         return json.serialize();
     }

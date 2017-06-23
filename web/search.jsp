@@ -35,7 +35,15 @@
 
                 <div class="modal-content content transparent">
                     <section class="box">
-                        <div class="overflow">
+                        <div id="loading" v-show="loading">
+                            <div class="sk-folding-cube">
+                                <div class="sk-cube1 sk-cube"></div>
+                                <div class="sk-cube2 sk-cube"></div>
+                                <div class="sk-cube4 sk-cube"></div>
+                                <div class="sk-cube3 sk-cube"></div>
+                            </div>
+                        </div>
+                        <div class="overflow" v-show="!loading">
                           <p class="image float-left">
                             <img :src="active.photo">
                           </p>
@@ -165,7 +173,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Atores envolvidos: </article>
                                 <article class="column is-8">
-                                    <select v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update s-3" class="selectpicker" multiple data-live-search="true">
+                                    <select data-multiple-separator=" | " v-model="actorsAct" name="actors" title="Nenhum ator selecionado" data-update="actor" data-none-results-text="Nenhum resultado encontrado" data-style="update s-3" class="selectpicker" multiple data-live-search="true">
                                         <option v-for="actor in actors" :value="actor.id">{{ actor.name }}</option>
                                     </select>
                                 </article>
@@ -173,7 +181,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Diretores participantes: </article>
                                 <article class="column is-8">
-                                    <select v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update s-4" class="selectpicker" multiple data-live-search="true">
+                                    <select data-multiple-separator=" | " v-model="directorsAct" name="directors" title="Nenhum diretor selecionado" data-update="director" data-none-results-text="Nenhum resultado encontrado" data-style="update s-4" class="selectpicker" multiple data-live-search="true">
                                         <option v-for="director in directors" :value="director.id">{{ director.name }}</option>
                                     </select>
                                 </article>
@@ -275,7 +283,7 @@
         <% ArrayList<Movie> m = (ArrayList<Movie>)request.getAttribute("movies"); %>
         var data = [];
         <% for (Movie item : m) { %>
-            data.push({ id: <%= item.getId() %>, title: `<%= item.getTitle().replaceAll("\\([0-9|?]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
+            data.push({ data: { actors: [], directors: [] }, id: <%= item.getId() %>, title: `<%= item.getTitle().replaceAll("\\([0-9|?]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
         <% } %>
 
         <% ArrayList<Director> d = (ArrayList<Director>)request.getAttribute("directors"); %>
@@ -329,9 +337,11 @@
         function setActive (active, index) {
             //if (this.active)
                 //this.active.data = null;
-            var self = this;
+            var self = this
+            this.loading = true
             this.advanced = false
             this.index = index;
+            self.active = active;
             if (!active) {
                 this.active = active;
                 return false;
@@ -340,6 +350,7 @@
                 .then(json => {
                     active.data = json.body.data;
                     self.active = active;
+                    self.loading = false;
                 });
         }
         
@@ -365,6 +376,7 @@
                 directorsAct,
                 active: null,
                 index: -1,
+                loading: true,
                 advanced: false
             },
             created: loadAssets,

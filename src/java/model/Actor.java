@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.regex.Pattern;
-
 /**
  *
  * @author felipe

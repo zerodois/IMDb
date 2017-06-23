@@ -16,21 +16,26 @@ public class Json {
     public Json () {
         json = "{";
     }
+    protected String validate(String str) {
+        if (str == null)
+            return null;
+        return str.replaceAll("\"", "\\\\\"");
+    }
     private void verify () {
         if (!json.equals("{"))
             json += ",";
     }
     public void addItem (String keyname, String value) {
         verify();
-        json += "\"" + keyname + "\" : \"" + value + "\"";
+        json += "\"" + validate(keyname) + "\" : \"" + validate(value) + "\"";
     }
     public void addItem (String keyname, int value) {
         verify();
-        json += "\"" + keyname + "\" : " + value;
+        json += "\"" + validate(keyname) + "\" : " + value;
     }
     public void addItem (String keyname, Json value) {
         verify();
-        json += "\"" + keyname + "\" : " + value.serialize();
+        json += "\"" + validate(keyname) + "\" : " + value.serialize();
     }
     public void addArray (String keyname, ArrayList<Json> arr) {
         verify();
