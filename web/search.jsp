@@ -129,7 +129,7 @@
                             <section class="columns no-margin">
                                 <article class="column is-4">Ano de lançamento: </article>
                                 <article class="column is-8">
-                                    <input name="year" v-model="year" @blur="year = Math.min(2017, Math.max(1800, year))" value="<%= bean.getYear() %>" type="number" placeholder="Ex.: 2004" class="input flat">
+                                    <input name="year" v-model="year" @blur="year = year == '' ? '' : Math.min(2017, Math.max(1800, year))" value="<%= bean.getYear() %>" type="number" placeholder="Ex.: 2004" class="input flat">
                                 </article>
                             </section>
                             <section class="columns no-margin">
@@ -367,7 +367,7 @@
                 langs: [],
                 lang: 0,
                 genres: [],
-                year: '',
+                year: '<%= bean.getYear() %>',
                 genre: '<%= bean.getGenre() %>',
                 category: '<%= bean.getCategory() %>',
                 actors,

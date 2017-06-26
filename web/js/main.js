@@ -49,6 +49,7 @@ function update(data, route, $parent) {
         }
         return ret;
     });
+    
     VueAPP[`${route}s`] = arr.concat(temp)
     setTimeout(function(){
         $parent.find('.no-results').text('Nenhum resultado encontrado');
