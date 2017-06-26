@@ -53,7 +53,8 @@ function update(data, route, $parent) {
     VueAPP[`${route}s`] = arr.concat(temp)
     setTimeout(function(){
         $parent.find('.no-results').text('Nenhum resultado encontrado');
-        $select.selectpicker('refresh');
+        if (VueAPP[`${route}s`].length > 0)
+            $select.selectpicker('refresh');
     }, 500)
 }
 

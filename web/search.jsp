@@ -22,7 +22,7 @@
         <tag:include />
     </head>
     <body class="relative app">
-        <div id="app" :class="{ 'hidden-scroll' : active }">
+        <div id="app" class="blur" :class="{ 'hidden-scroll' : active }" style="--blur: 3px">
             <!-- INICIO: MODAL  -->
             <div id="movie-viewer" class="modal" :class="{ 'is-active' : active }" v-if="active">
                 <div class="modal-background"></div>
@@ -223,7 +223,7 @@
                                         <img :src="movie.photo" alt="Image">
                                       </figure>
                                     </div>
-                                    <div class="movie-subtitle has-text-centered">{{ movie.title }} ({{ movie.year }})</div>
+                                    <div class="movie-subtitle has-text-centered">{{ movie.title }} ({{ movie.year == '' ? '????' : movie.year }})</div>
                                 </div>
                             </div>
                         </div>
@@ -277,13 +277,20 @@
                 </article>
             </section>            
         </div>
+        <%@include  file="loading.html" %>
     </body>
     <tag:scripts />
     <script>
         <% ArrayList<Movie> m = (ArrayList<Movie>)request.getAttribute("movies"); %>
         var data = [];
         <% for (Movie item : m) { %>
-            data.push({ data: { actors: [], directors: [] }, id: <%= item.getId() %>, title: `<%= item.getTitle().replaceAll("\\([0-9|?]+\\)", "") %>`, year: '<%= item.getYear() %>', photo: 'img/movies/default.jpg' });
+            data.push({
+                data: { actors: [], directors: [] },
+                id: <%= item.getId() %>,
+                title: `<%= item.getTitle().replaceAll("\\([0-9|?|VG|TV]+\\)", "").replaceAll("\"", "") %>`,
+                year: '<%= item.getYear() %>',
+                photo: 'img/movies/default.jpg'
+            });
         <% } %>
 
         <% ArrayList<Director> d = (ArrayList<Director>)request.getAttribute("directors"); %>
@@ -308,6 +315,9 @@
         }
     
         function loadAssets () {
+            document.getElementById("app").style.setProperty('--blur', '0')
+            let load = document.getElementById("loading-supremo");
+            load.parentNode.removeChild(load);
             var self = this;
             this.$http.get('api/genre').then(data => {
                 self.genre = '<%= bean.getGenre() != null ? bean.getGenre() : "" %>'
@@ -325,7 +335,7 @@
             this.movies.forEach((movie, index) => {
                 ///*
                 var key = '14ec215fa352ace6de70d93ff09bcf04';
-                var title = movie.title.trim().replace('"', "").toLowerCase()//.replace(/\ /g, "%20");
+                var title = movie.title.trim().replace(/\{.*\}/g, "").toLowerCase().trim()//.replace(/\ /g, "%20");
                 var url = 'https://api.themoviedb.org/3/search/multi?include_adult=true&query=' + escape(title) + '&api_key=' + key;
                 self.$http.get(url)
                     .then(resp => self.movies[index].photo = format(resp.body) || self.movies[index].photo)

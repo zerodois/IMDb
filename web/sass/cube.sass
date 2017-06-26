@@ -1,0 +1,75 @@
+#loading-supremo
+    position: fixed
+    //background-color: $primary
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index: 99
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    perspective: 800px
+
+    h1
+        @extend .title
+        font-size: 1.7rem
+        margin-top: 3rem
+
+    $size: 100px
+
+    .cube 
+      position: relative
+      height: var(--size, #{$size})
+      width: var(--size, #{$size})
+      transform-style: preserve-3d
+      animation: rotation 10s infinite linear
+    
+
+    @keyframes rotation 
+      0% 
+        transform: rotateY(0deg) rotateX(0deg)
+      
+      100% 
+        transform: rotateY(360deg) rotateX(360deg)
+      
+    
+
+    .face 
+      height: var(--size, #{$size})
+      width: var(--size, #{$size})
+      position: absolute
+    
+
+    .side 
+      background-image: url('https://uploaddeimagens.com.br/images/000/955/232/full/side.jpg?1497835464')
+    
+
+    .left 
+      background-color: gold
+      transform: translateX(calc(var(--size, #{$size})/2*-1)) rotateY(90deg)
+    
+    .right 
+      background-color: blue
+      transform: translateX(calc(var(--size, #{$size})/2)) rotateY(90deg)
+    
+    .top 
+      background-image: url('https://uploaddeimagens.com.br/images/000/955/233/thumb/top.jpg?1497835487')
+      background-color: red
+      transform: translateY(calc(var(--size, #{$size})/2*-1)) rotateX(90deg)
+    
+    .bottom 
+      background-color: green
+      transform: translateY( calc(var(--size, #{$size})/2) ) rotateX(90deg)
+      background-image: url('https://uploaddeimagens.com.br/images/000/955/231/full/bottom.jpg?1497835434')
+    
+    .back 
+      background-color: magenta
+      transform: translateZ( calc(var(--size, #{$size})/2*-1) )
+    
+    .front 
+      background-color: MediumSpringGreen
+      transform: translateZ( calc(var(--size, #{$size})/2) )
+    
+

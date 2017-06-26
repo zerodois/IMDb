@@ -57,6 +57,8 @@ input.flat
     opacity: 0.7
     &:hover
         opacity: 1
+.blur
+    +blur(var(--blur, 0))
 .modal.is-active ~ .blurrable
     +blur(10px)
     overflow: hidden
