@@ -39,8 +39,17 @@ function update(data, route, $parent) {
     $select.find("option:selected").each(function(i, item){
         arr.push({ name: item.text, id: item.value })
     })
-    VueAPP[`${route}s`] = arr.concat(data.body[`${route}s`])
-    console.log(data.body[`${route}s`])
+    let temp = data.body[`${route}s`].filter(el => {
+        let ret = true;
+        for (let i in arr) {
+            if (Number(arr[i].id) === Number(el.id)) {
+                ret = false;
+               break;
+            }
+        }
+        return ret;
+    });
+    VueAPP[`${route}s`] = arr.concat(temp)
     setTimeout(function(){
         $parent.find('.no-results').text('Nenhum resultado encontrado');
         $select.selectpicker('refresh');
