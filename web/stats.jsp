@@ -24,46 +24,52 @@
             </header>
 
             <!-- prepare a DOM container with width and height -->
-            <section class="container">
-                <div class="columns content transparent">
-                    <article class="column is-12">
-                        <div style="width: 900px; margin: auto;">
-                            Abaixo encontra-se um gráfico contendo um ranking com os 100 pares atores/diretores que mais trabalharam em conjunto, 
-                            seguido da tabela contendo todos os pares que trabalharam juntos mais que <a title="Clique para atualizar" v-show="!show" @click="focus">{{ X }}</a><input :ref="'input-X'" v-show="show" @keypress="enter" @blur="atualize" class="magic" v-model="X" type="number" min="0" size="4" max="9999"> vezes :)
-                        </div>
-                        <div id="graph" style="width: 1000px; height:500px;"></div>
-                    </article>
-                </div>
-                <div class="columns">
-                    <article class="is-10 is-offset-1 column">
-                        <table class="table is-striped no-bottom">
-                            <thead>
-                              <tr>
-                                <th class="has-text-centered">Classificação</th>
-                                <th>Nome do ator</th>
-                                <th>Nome do diretor</th>
-                                <th>Trabalhos realizados em dupla</th>
-                              </tr>
-                            </thead>
-                            <tfoot v-if="ranking.length > 30">
-                              <tr>
-                                <th class="has-text-centered">Classificação</th>
-                                <th>Nome do ator</th>
-                                <th>Nome do diretor</th>
-                                <th>Trabalhos realizados em dupla</th>
-                              </tr>
-                            </tfoot>
-                            <tbody>
-                              <tr v-for="(item, i) in ranking">
-                                <td class="has-text-centered">{{ i + 1 }}º</td>
-                                <td>{{ item.actor.name }}</td>
-                                <td>{{ item.director.name }}</td>
-                                <td>{{ item.amount }}</td>
-                              </tr>
-                            </tbody>
-                        </table>
-                    </article>
-                </div>
+            <section class="container" :class="{ 'no-stats' : ranking.length == 0 }">
+                <article>
+                    <div class="columns content transparent">
+                        <article class="column is-12">
+                            <div style="width: 900px; margin: auto;">
+                                <span v-show="ranking.length > 0">Abaixo encontra-se um gráfico contendo um ranking com os 100 pares atores/diretores que mais trabalharam em conjunto, 
+                                    seguido da tabela contendo todos os pares que trabalharam juntos mais que</span><span v-show="ranking.length == 0">Parece que temos um sheroque rolmes aqui, já que não há registros de pares atores/diretores que trabalharam juntos mais que</span> <a title="Clique para atualizar" v-show="!show" @click="focus">{{ X }}</a><input :ref="'input-X'" v-show="show" @keypress="enter" @blur="atualize" class="magic" v-model="X" type="number" min="0" size="4" max="9999"> vezes :)
+                            </div>
+                            <article v-show="ranking.length == 0" id="no-stats">
+                                <img src="img/error.svg" alt="">
+                            </article>
+                            <div id="graph" v-show="ranking.length > 0" style="width: 1000px; height:500px;"></div>
+                        </article>
+                    </div>
+                    <div class="columns" v-show="ranking.length > 0">
+                        <article class="is-10 is-offset-1 column">
+                            <table class="table is-striped no-bottom">
+                                <thead>
+                                  <tr>
+                                    <th class="has-text-centered">Classificação</th>
+                                    <th>Nome do ator</th>
+                                    <th>Nome do diretor</th>
+                                    <th>Trabalhos realizados em dupla</th>
+                                  </tr>
+                                </thead>
+                                <tfoot v-if="ranking.length > 30">
+                                  <tr>
+                                    <th class="has-text-centered">Classificação</th>
+                                    <th>Nome do ator</th>
+                                    <th>Nome do diretor</th>
+                                    <th>Trabalhos realizados em dupla</th>
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                  <tr v-for="(item, i) in ranking">
+                                    <td class="has-text-centered">{{ i + 1 }}º</td>
+                                    <td>{{ item.actor.name }}</td>
+                                    <td>{{ item.director.name }}</td>
+                                    <td>{{ item.amount }}</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                        </article>
+                    </div>
+
+                </article>
             </section>
         </div>
     </body>
